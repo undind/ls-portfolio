@@ -52,3 +52,87 @@ html(lang="en")
                   h2.greeting__name Сергей Антонов
                   .greeting__what Я занимаюсь разработкой современных сайтов и приложений. Мне нравится делать интересные и современные проекты.
                   .greeting__about Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
+        section.section.service
+          .container
+            .services
+              .services__title Чем я могу быть полезен вам
+              .services__desc Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
+            .services__picture
+              +image('services/backpack.png', 'services__img')
+            .services__content
+              .services__head Front-end
+              ul.services__list
+                li.services__item
+                  svg(class="percentage" viewBox="0 0 100 100" preserveAspectRatio="none")
+                    defs
+                      linearGradient(id="gradient" x1="0%" y1="0%" x2="100%" y2="0%")
+                        stop(offset="0%" stop-color="#9300e8")
+                        stop(offset="100%" stop-color="#4a00ed")
+                    circle(cx="50" cy="50" r="40" class="circle circle__under")
+                    circle(cx="50" cy="50" r="40" class="circle circle__above" stroke="url(#gradient)" style="animation-delay: -25s")
+                    text(x="-50%" y="-50%" dominant-baseline="middle" text-anchor="middle" class="circle__text") HTML5
+                li.services__item
+                  svg(class="percentage" viewBox="0 0 100 100" preserveAspectRatio="none")
+                    defs
+                      linearGradient(id="gradient" x1="0%" y1="0%" x2="100%" y2="0%")
+                        stop(offset="0%" stop-color="#9300e8")
+                        stop(offset="100%" stop-color="#4a00ed")
+                    circle(cx="50" cy="50" r="40" class="circle circle__under")
+                    circle(cx="50" cy="50" r="40" class="circle circle__above" stroke="url(#gradient)" style="animation-delay: -15s")
+                    text(x="-50%" y="-50%" dominant-baseline="middle" text-anchor="middle" class="circle__text") CSS3
+                li.services__item
+                  svg(class="percentage" viewBox="0 0 100 100" preserveAspectRatio="none")
+                    defs
+                      linearGradient(id="gradient" x1="0%" y1="0%" x2="100%" y2="0%")
+                        stop(offset="0%" stop-color="#9300e8")
+                        stop(offset="100%" stop-color="#4a00ed")
+                    circle(cx="50" cy="50" r="40" class="circle circle__under")
+                    circle(cx="50" cy="50" r="40" class="circle circle__above" stroke="url(#gradient)" style="animation-delay: -75s")
+                    text(x="-50%" y="-50%" dominant-baseline="middle" text-anchor="middle" class="circle__text") Javascript
+                li.services__item
+                  svg(class="percentage" viewBox="0 0 100 100" preserveAspectRatio="none")
+                    defs
+                      linearGradient(id="gradient" x1="0%" y1="0%" x2="100%" y2="0%")
+                        stop(offset="0%" stop-color="#9300e8")
+                        stop(offset="100%" stop-color="#4a00ed")
+                    circle(cx="50" cy="50" r="40" class="circle circle__under")
+                    circle(cx="50" cy="50" r="40" class="circle circle__above" stroke="url(#gradient)" style="animation-delay: -25s")
+                    text(x="-50%" y="-50%" dominant-baseline="middle" text-anchor="middle" class="circle__text") Jquery
+              .services__head Workflow
+              ul.services__list
+                li.services__item
+                  svg(class="percentage" viewBox="0 0 100 100" preserveAspectRatio="none")
+                    defs
+                      linearGradient(id="gradient" x1="0%" y1="0%" x2="100%" y2="0%")
+                        stop(offset="0%" stop-color="#9300e8")
+                        stop(offset="100%" stop-color="#4a00ed")
+                    circle(cx="50" cy="50" r="40" class="circle circle__under")
+                    circle(cx="50" cy="50" r="40" class="circle circle__above" stroke="url(#gradient)" style="animation-delay: -15s")
+                    text(x="-50%" y="-50%" dominant-baseline="middle" text-anchor="middle" class="circle__text") GIT
+                li.services__item
+                  svg(class="percentage" viewBox="0 0 100 100" preserveAspectRatio="none")
+                    defs
+                      linearGradient(id="gradient" x1="0%" y1="0%" x2="100%" y2="0%")
+                        stop(offset="0%" stop-color="#9300e8")
+                        stop(offset="100%" stop-color="#4a00ed")
+                    circle(cx="50" cy="50" r="40" class="circle circle__under")
+                    circle(cx="50" cy="50" r="40" class="circle circle__above" stroke="url(#gradient)" style="animation-delay: -25s")
+                    text(x="-50%" y="-50%" dominant-baseline="middle" text-anchor="middle" class="circle__text") Terminal
+                li.services__item
+                  svg(class="percentage" viewBox="0 0 100 100" preserveAspectRatio="none")
+                    defs
+                      linearGradient(id="gradient" x1="0%" y1="0%" x2="100%" y2="0%")
+                        stop(offset="0%" stop-color="#9300e8")
+                        stop(offset="100%" stop-color="#4a00ed")
+                    circle(cx="50" cy="50" r="40" class="circle circle__under")
+                    circle(cx="50" cy="50" r="40" class="circle circle__above" stroke="url(#gradient)" style="animation-delay: -50s")
+                    text(x="-50%" y="-50%" dominant-baseline="middle" text-anchor="middle" class="circle__text") Gulp
+                li.services__item
+                  svg(class="percentage" viewBox="0 0 100 100" preserveAspectRatio="none")
+                    defs
+                      linearGradient(id="gradient" x1="0%" y1="0%" x2="100%" y2="0%")
+                        stop(offset="0%" stop-color="#9300e8")
+                        stop(offset="100%" stop-color="#4a00ed")
+                    circle(cx="50" cy="50" r="40" class="circle circle__under")
+                    circle(cx="50" cy="50" r="40" class="circle circle__above" stroke="url(#gradient)" style="animation-delay: -35s")
+                    text(x="-50%" y="-50%" dominant-baseline="middle" text-anchor="middle" class="circle__text") Webpack
