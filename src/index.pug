@@ -11,7 +11,7 @@ html(lang="en")
     .wrapper
       .maincontent
         .parallax-wrapper
-          section.section.menu-section.fullscreen-section
+          section.menu-section.fullscreen-section
             .container.container-column
               header.header
                 a(class='header__logo' href="#") СА
@@ -31,7 +31,7 @@ html(lang="en")
               .scroll
                 a.scroll__desc Скролл
                 +icon('Scroll', 'scroll__icon')
-          section.section.greeting
+          section.greeting
             .container.container-centred
               .greeting__content
                 .greeting__desc
@@ -52,7 +52,7 @@ html(lang="en")
                   h2.greeting__name Сергей Антонов
                   .greeting__what Я занимаюсь разработкой современных сайтов и приложений. Мне нравится делать интересные и современные проекты.
                   .greeting__about Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
-        section.section.service
+        section.service
           .container
             .services
               .services__title Чем я могу быть полезен вам
@@ -82,10 +82,36 @@ html(lang="en")
                                   stop(offset="0%" stop-color="#9300e8")
                                   stop(offset="100%" stop-color="#4a00ed")
                               .skill__name #{skill.name}
-        section.section.works
+        section.works
           .container
-            .works__title
+            .works__title Мои работы
             .works__content
               .works__slider
-                .slider__display
-                .slider__info
+                .works__slider-display
+                  .slider__display(data-index="4")
+                    .slider__display-current
+                      +image('slider/1.jpg', 'slider__display-img')
+                    .slider__display-thumbs
+                      .slider__thumbs
+                        +slider-thumbs([4, 3, 2, 1], 1)
+                        //- - for (var i = 1; i < 5; i++)
+                        //-   .slider__thumbs-item
+                        //-     +image(`slider/${i}.jpg`, 'slider__thumbs-img')
+                    .slider__display-buttons
+                      .slider-buttons
+                        button.slider__button
+                          +icon('Short Arrow', 'slider__button-icon slider__button-icon-prev')
+                        button.slider__button
+                          +icon('Short Arrow', 'slider__button-icon slider__button-icon-next')
+                .works__slider-info
+                  .slider-info
+                    .slider-info__tags
+                      - var tags = [ 'HTML', 'CSS', 'Javascript']
+                      ul.slider__tags
+                        each tag in tags
+                          li.slider__tags-item #{tag}
+                    .slider-info__title Сайт школы образования
+                    .slider-info__desc Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
+                    a.slider-info__link(href="#" target="_blank")
+                      +icon('Link', 'slider-info__link-icon')
+                      .slider-info__link-text Посмотреть сайт
