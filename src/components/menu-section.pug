@@ -1,0 +1,22 @@
+section.menu-section.fullscreen-section
+            .container.container-column
+              header.menu__header
+                .header__logo
+                  a(class='header__logo' href="#") СА
+                .header__menu
+                  +nav-menu('nav', ["Главная", "Обо мне", "Навыки", "Работы", "Отзывы", "Связаться"])
+                .header__social
+                  ul.social__list
+                    each social in ['Instagram', 'Vkontakte', 'Github']
+                      li.social__item
+                        a(class=`social__link social__link-${social}` href='#' target="_blank")
+                          +icon(social, `social__link-pic`)
+                #hamburgerButton.hamburger.hamburger--stand
+                  .hamburger-box
+                    .hamburger-inner
+              .author__content
+                .content__text Личный сайт веб разработчика
+                h1.content__name Сергей Антонов
+              .scroll
+                a.scroll__desc Скролл
+                +icon('Scroll', 'scroll__icon')

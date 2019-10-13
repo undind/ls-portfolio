@@ -1,0 +1,30 @@
+section.service
+  .container
+    .services
+      .services__title Чем я могу быть полезен вам
+      .services__desc Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
+    .services__picture
+      +image('services/backpack.png', 'services__img')
+    .services__content
+      .services__skills
+        -
+          var skills = [
+            { title: 'Frontend', skills: [ { name: 'HTML5', percent: 25 }, { name: 'CSS', percent: 15 }, { name: 'Javascript', percent: 75 }, { name: 'Jquery и Vue.js', percent: 25 } ] },
+            { title: 'Workflow', skills: [ { name: 'GIT', percent: 15 }, { name: 'Terminal', percent: 25 }, { name: 'Gulp', percent: 50 }, { name: 'Webpack', percent: 35 } ] }
+          ]
+        each group in skills
+          .skills__row
+            .skills__group
+              .skills__group-title #{group.title}
+              .skills__group-items
+                each skill in group.skills
+                  .skills__group-item
+                    .skill
+                      svg.skill__chart(viewBox="0 0 100 100" preserveAspectRatio="none")
+                        - var r = 40
+                        circle(cx="50" cy="50" r="40" class="skill__circle" fill="none" stroke="#e9e9e9" stroke-width="7")
+                        circle(cx="50" cy="50" r="40" class="skill__circle" fill="none" stroke="url(#gradient)" stroke-width="15" stroke-dasharray=`${2 * Math.PI * r}` stroke-dashoffset=`${2 * Math.PI * r * (100 - skill.percent) / 100}`)
+                        linearGradient(id="gradient" x1="0%" y1="0%" x2="100%" y2="0%")
+                          stop(offset="0%" stop-color="#9300e8")
+                          stop(offset="100%" stop-color="#4a00ed")
+                      .skill__name #{skill.name}
