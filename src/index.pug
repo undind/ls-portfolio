@@ -10,12 +10,14 @@ html(lang="en")
   body
     .wrapper
       .maincontent
-        .parallax-wrapper
+        .main
           section.menu-section.fullscreen-section
             .container.container-column
-              header.header
-                a(class='header__logo' href="#") СА
-                +nav-menu('nav', ["Главная", "Обо мне", "Навыки", "Работы", "Отзывы", "Связаться"])
+              header.menu__header
+                .header__logo
+                  a(class='header__logo' href="#") СА
+                .header__menu
+                  +nav-menu('nav', ["Главная", "Обо мне", "Навыки", "Работы", "Отзывы", "Связаться"])
                 .header__social
                   ul.social__list
                     each social in ['Instagram', 'Vkontakte', 'Github']
@@ -52,6 +54,11 @@ html(lang="en")
                   h2.greeting__name Сергей Антонов
                   .greeting__what Я занимаюсь разработкой современных сайтов и приложений. Мне нравится делать интересные и современные проекты.
                   .greeting__about Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
+        .triangles
+          svg.triangles__item(viewBox="0 0 1000 100" preserveAspectRatio="none")
+            polygon(points="0,0 0,100 1000,100")
+          svg.triangles__item(viewBox="0 0 1000 100" preserveAspectRatio="none")
+            polygon(points="0,100 1000,100 1000,0")
         section.service
           .container
             .services
@@ -115,3 +122,39 @@ html(lang="en")
                     a.slider-info__link(href="#" target="_blank")
                       +icon('Link', 'slider-info__link-icon')
                       .slider-info__link-text Посмотреть сайт
+        section.reviews
+          .container
+            .reviews-about
+              .reviews-about__header
+                .reviews-about__title Что обо мне говорят
+                .reviews-about__buttons
+                  button.reviews__button
+                    +icon('Short Arrow', 'reviews__button-icon reviews__button-icon-prev')
+                  button.reviews__button
+                    +icon('Short Arrow', 'reviews__button-icon reviews__button-icon-next')
+              .reviews-about__slider
+                .reviews__slider
+                  ul.reviews__list
+                    li.reviews__item
+                      .reviews__item-quotes
+                        +icon('Quote', 'reviews__item-quotes-icon')
+                      .reviews__item-desc
+                        .reviews__item-text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
+                        .reviews__item-authors
+                          .reviews__item-avatar
+                            +image('reviews/1.png', 'reviews__item-avatar-img')
+                          .reviews__item-content
+                            .reviews__item-name Ковальчук Дмитрий
+                            .reviews__item-position Основатель Loftschool
+                    li.reviews__item
+                      .reviews__item-quotes
+                        +icon('Quote', 'reviews__item-quotes-icon')
+                      .reviews__item-desc
+                        .reviews__item-text Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах
+                        .reviews__item-authors
+                          .reviews__item-avatar
+                            +image('reviews/2.png', 'reviews__item-avatar-img')
+                          .reviews__item-content
+                            .reviews__item-name Владимир Сабанцев
+                            .reviews__item-position Преподаватель
+

@@ -14,7 +14,7 @@ mixin nav-menu(className, items)
           a(class=`${className}__link` href="#")= item
 
 mixin slider-thumbs(items, activeClass)
-  - for (var i = 1; i < 5; i++)
+  - for (var i = 1; i < items.length + 1; i++)
     div(class=`slider__thumbs-item ` + ( (i === activeClass) ? 'active' : '') )
       +image(`slider/${i}.jpg`, 'slider__thumbs-img')
 
