@@ -192,4 +192,25 @@ html(lang="en")
         section.footer-section
           .container
             footer.footer
+              .footer__copyright
+                .footer__copyright-year &copy; 2019
+                .footer__copyright-author
+                  .footer__copyright-name Сергей Антонов
+                  .footer__copyright-desc Личный сайт веб-разработчика
+              .footer__menu
+                .footer__menu-nav
+                  +nav-menu('nav', ["Главная", "Обо мне", "Навыки", "Работы", "Отзывы", "Связаться"])
+                .footer__menu-content
+                  .footer__menu-social
+                    .footer__menu-text Этот сайт я сделал в рамках обучения в Школе онлайн образования Loftschool
+                    .footer__menu-links
+                      ul.social__list
+                        each social in ['Instagram', 'Vkontakte', 'Github']
+                          li.social__item.social__item-footer
+                            a(class=`social__link social__link-${social} social__link-footer` href='#' target="_blank")
+                              +icon(social, `social__link-pic-footer`)
+                  .footer__menu-quote
+                    .footer__menu-quote-text Всегда пишите код так, будто сопровождать его будет склонный к насилию психопат, который знает где вы живете
+                    .footer__menu-quote-author Martin Golding
+
 
