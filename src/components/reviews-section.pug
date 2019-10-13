@@ -8,33 +8,5 @@ section.reviews
             +icon('Short Arrow', 'reviews__button-icon reviews__button-icon-prev')
           button.reviews__button
             +icon('Short Arrow', 'reviews__button-icon reviews__button-icon-next')
-      .reviews-about__slider
-        .reviews__slider
-          ul.reviews__list
-            li.reviews__item
-              .reviews__item-quotes
-                +icon('Quote', 'reviews__item-quotes-icon')
-              .reviews__item-desc
-                .reviews__item-text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-                .reviews__item-authors
-                  .reviews__item-avatar
-                    +image('reviews/1.png', 'reviews__item-avatar-img')
-                  .reviews__item-content
-                    .reviews__item-name Ковальчук Дмитрий
-                    .reviews__item-position Основатель Loftschool
-            li.reviews__item
-              .reviews__item-quotes
-                +icon('Quote', 'reviews__item-quotes-icon')
-              .reviews__item-desc
-                .reviews__item-text Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах
-                .reviews__item-authors
-                  .reviews__item-avatar
-                    +image('reviews/2.png', 'reviews__item-avatar-img')
-                  .reviews__item-content
-                    .reviews__item-name Владимир Сабанцев
-                    .reviews__item-position Преподаватель
-  .triangles.triangles-budda
-    svg.triangles__item(viewBox="0 0 1000 100" preserveAspectRatio="none")
-      polygon(points="1000,0 1000,100 0,0")
-    svg.triangles__item(viewBox="0 0 1000 100" preserveAspectRatio="none")
-      polygon(points="0,0 1000,0 0,100")
+      include reviews-slider
+  include reviews-triangles

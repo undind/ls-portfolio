@@ -1,0 +1,6 @@
+.header__social
+  ul.social__list
+    each social in ['Instagram', 'Vkontakte', 'Github']
+      li.social__item
+        a(class=`social__link social__link-${social}` href='#' target="_blank")
+          +icon(social, `social__link-pic`)

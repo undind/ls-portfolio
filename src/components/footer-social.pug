@@ -1,0 +1,5 @@
+ul.social__list
+  each social in ['Instagram', 'Vkontakte', 'Github']
+    li.social__item.social__item-footer
+      a(class=`social__link social__link-${social} social__link-footer` href='#' target="_blank")
+        +icon(social, `social__link-pic-footer`)

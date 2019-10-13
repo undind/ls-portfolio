@@ -3,31 +3,5 @@ section.works
     .works__title Мои работы
     .works__content
       .works__slider
-        .works__slider-display
-          .slider__display(data-index="4")
-            .slider__display-current
-              +image('slider/1.jpg', 'slider__display-img')
-            .slider__display-thumbs
-              .slider__thumbs
-                +slider-thumbs([4, 3, 2, 1], 1)
-                //- - for (var i = 1; i < 5; i++)
-                //-   .slider__thumbs-item
-                //-     +image(`slider/${i}.jpg`, 'slider__thumbs-img')
-            .slider__display-buttons
-              .slider-buttons
-                button.slider__button
-                  +icon('Short Arrow', 'slider__button-icon slider__button-icon-prev')
-                button.slider__button
-                  +icon('Short Arrow', 'slider__button-icon slider__button-icon-next')
-        .works__slider-info
-          .slider-info
-            .slider-info__tags
-              - var tags = [ 'HTML', 'CSS', 'Javascript']
-              ul.slider__tags
-                each tag in tags
-                  li.slider__tags-item #{tag}
-            .slider-info__title Сайт школы образования
-            .slider-info__desc Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
-            a.slider-info__link(href="#" target="_blank")
-              +icon('Link', 'slider-info__link-icon')
-              .slider-info__link-text Посмотреть сайт
+        include works-slider
+        include works-info
