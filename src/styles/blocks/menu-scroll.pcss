@@ -5,14 +5,22 @@
   padding-bottom: 20px;
 }
 
-.scroll__desc {
+.scroll__link {
+  display: flex;
   font-size: 18px;
-  margin-right: 22px;
   transition: all 0.3s;
 
   &:hover {
     color: $links-color;
+
+    & .scroll__icon {
+      fill: $links-color;
+    }
   }
+}
+
+.scroll__desc {
+  margin-right: 22px;
 }
 
 .scroll__icon {
@@ -20,8 +28,4 @@
   height: 30px;
   cursor: pointer;
   transition: all 0.3s;
-
-  &:hover {
-    fill: $links-color;
-  }
 }
