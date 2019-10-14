@@ -2,20 +2,20 @@
   form.form__elem
     .form__row
       label.form__block.form__block-name
-        input.form__input
+        input(type="name" required).form__input
         span.form__text Введите ваше Имя
         span.form__border
         span.form__svg
           +icon('Avatar', 'form__svg-icon')
       label.form__block.form__block-email
-        input.form__input
+        input(type="email" required).form__input
         span.form__text Введите ваш email
         span.form__border
         span.form__svg
           +icon('Envelope', 'form__svg-icon')
     .form__row
       label.form__block
-        input.form__input
+        input(type="text" required).form__input
         span.form__text Сообщение к письму
         span.form__border
         span.form__svg

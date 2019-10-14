@@ -59,4 +59,18 @@
   opacity: 0.5;
   width: 95%;
   line-height: $l-height;
+  position: relative;
+
+  &::before {
+    content: '*';
+    display: inline-block;
+    font-size: 48px;
+    color: #db0200;
+    opacity: 0.1;
+    font-style: italic;
+    position: absolute;
+    top: -20%;
+    left: -60px;
+    transform: rotate(8deg);
+  }
 }

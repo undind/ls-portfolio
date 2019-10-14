@@ -18,6 +18,28 @@ mixin slider-thumbs(items, activeClass)
     div(class=`slider__thumbs-item ` + ( (i === activeClass) ? 'active' : '') )
       +image(`slider/${i}.jpg`, 'slider__thumbs-img')
 
+mixin socials(items, footer)
+  ul.social__list
+    each social in items
+      li.social__item
+        a(class=`social__link social__link-${social}` + ( (footer === 'footer') ? ` social__link-footer` : '' ) href='#' target="_blank")
+          +icon(social, `social__link-pic` + ( (footer === 'footer') ? ` social__link-pic-footer` : '' ) )
+
+mixin triangles(addClassTriangles)
+  div(class=`triangles` + ( (addClassTriangles === 'triangles-budda') ? ` ${addClassTriangles}` : '' ) )
+    svg.triangles__item(viewBox="0 0 1000 100" preserveAspectRatio="none")
+      case addClassTriangles
+        when 'triangles-budda'
+          polygon(points="1000,0 1000,100 0,0")
+        default
+          polygon(points="0,0 0,100 1000,100")
+    svg.triangles__item(viewBox="0 0 1000 100" preserveAspectRatio="none")
+      case addClassTriangles
+        when 'triangles-budda'
+          polygon(points="0,0 1000,0 0,100")
+        default
+          polygon(points="0,100 1000,100 1000,0")
+
 //- mixin svg-list(className, items, percents)
 //-   ul(class=`${className}__list`)
 //-     - for (var i = 0; i < items; i++)

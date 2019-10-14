@@ -30,11 +30,16 @@
   background-color: transparent;
   justify-content: center;
   align-items: center;
-  transition: background-color .3s;
+  transition: all .3s;
   margin-right: 28px;
 
   &:hover {
-    background-color: #5500f2;
+    border-color: $links-color;
+
+    & .reviews__button-icon {
+      fill: $links-color;
+      transition: all .3s;
+    }
   }
 }
 

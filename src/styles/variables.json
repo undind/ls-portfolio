@@ -1,6 +1,7 @@
 {
   "text-color": "#464d62",
-  "links-color": "#4b6fd7",
+  "links-color": "#5500f2",
+  "links-footer": "#ff9a00",
   "l-height": "1.875",
   "bp-desktop-hd": "1800px",
   "bp-desktop": "1200px",
