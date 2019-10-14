@@ -1,0 +1,31 @@
+.scroll {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.scroll__link {
+  display: flex;
+  font-size: 18px;
+  transition: all 0.3s;
+
+  &:hover {
+    color: $links-color;
+
+    & .scroll__icon {
+      fill: $links-color;
+    }
+  }
+}
+
+.scroll__desc {
+  margin-right: 22px;
+}
+
+.scroll__icon {
+  width: 25px;
+  height: 30px;
+  cursor: pointer;
+  transition: all 0.3s;
+}

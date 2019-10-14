@@ -5,3 +5,50 @@ mixin icon(name, className)
 
 mixin image(path, className)
   img(src=require(`images/${path}`) class=className)
+
+mixin nav-menu(className, items)
+  nav(class=`${className}`)
+    ul(class=`${className}__list`)
+      each item in items
+        li(class=`${className}__item`)
+          a(class=`${className}__link` href="#")= item
+
+mixin slider-thumbs(items, activeClass)
+  - for (var i = 1; i < items.length + 1; i++)
+    div(class=`slider__thumbs-item ` + ( (i === activeClass) ? 'active' : '') )
+      +image(`slider/${i}.jpg`, 'slider__thumbs-img')
+
+mixin socials(items, footer)
+  ul.social__list
+    each social in items
+      li.social__item
+        a(class=`social__link social__link-${social}` + ( (footer === 'footer') ? ` social__link-footer` : '' ) href='#' target="_blank")
+          +icon(social, `social__link-pic` + ( (footer === 'footer') ? ` social__link-pic-footer` : '' ) )
+
+mixin triangles(addClassTriangles)
+  div(class=`triangles` + ( (addClassTriangles === 'triangles-budda') ? ` ${addClassTriangles}` : '' ) )
+    svg.triangles__item(viewBox="0 0 1000 100" preserveAspectRatio="none")
+      case addClassTriangles
+        when 'triangles-budda'
+          polygon(points="1000,0 1000,100 0,0")
+        default
+          polygon(points="0,0 0,100 1000,100")
+    svg.triangles__item(viewBox="0 0 1000 100" preserveAspectRatio="none")
+      case addClassTriangles
+        when 'triangles-budda'
+          polygon(points="0,0 1000,0 0,100")
+        default
+          polygon(points="0,100 1000,100 1000,0")
+
+//- mixin svg-list(className, items, percents)
+//-   ul(class=`${className}__list`)
+//-     - for (var i = 0; i < items; i++)
+//-       li(class=`${className}__item`)
+//-         svg(class=percentage viewBox="0 0 100 100" preserveAspectRatio="none")
+//-           defs
+//-             linearGradient(id="gradient" x1="0%" y1="0%" x2="100%" y2="0%")
+//-               stop(offset="0%" stop-color="#9300e8")
+//-               stop(offset="100%" stop-color="#4a00ed")
+//-           circle(cx="50" cy="50" r="40" class="circle circle__under")
+//-             each percent in percents
+//-             circle(cx="50" cy="50" r="40" class="circle circle__above" stroke="url(#gradient)" style=`animation-delay: -${percent}s`)

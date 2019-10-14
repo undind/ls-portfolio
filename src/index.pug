@@ -10,6 +10,21 @@ html(lang="en")
   body
     .wrapper
       .maincontent
-        +image('content/user.jpg', 'user-pic')
-        +icon('link', 'link-class')
-        .icon-bg
+        .main
+
+          include components/menu-section
+          
+          include components/greeting-section
+          
+        include components/triangles
+
+        include components/service-section
+
+        include components/works-section
+
+        .budda-wrapper
+        
+          include components/reviews-section
+          include components/feedback-section
+
+        include components/footer-section

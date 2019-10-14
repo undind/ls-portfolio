@@ -1,0 +1,17 @@
+.works__slider
+  .works__slider-display
+    .slider__display(data-index="4")
+      .slider__display-current
+        +image('slider/1.jpg', 'slider__display-img')
+      .slider__display-thumbs
+        .slider__thumbs
+          +slider-thumbs([4, 3, 2, 1], 1)
+          //- - for (var i = 1; i < 5; i++)
+          //-   .slider__thumbs-item
+          //-     +image(`slider/${i}.jpg`, 'slider__thumbs-img')
+      .slider__display-buttons
+        .slider-buttons
+          button.slider__button
+            +icon('Short Arrow', 'slider__button-icon slider__button-icon-prev')
+          button.slider__button
+            +icon('Short Arrow', 'slider__button-icon slider__button-icon-next')

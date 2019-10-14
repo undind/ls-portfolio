@@ -1,0 +1,12 @@
+section.reviews
+  .container
+    .reviews-about
+      .reviews-about__header
+        .reviews-about__title Что обо мне говорят
+        .reviews-about__buttons
+          button.reviews__button
+            +icon('Short Arrow', 'reviews__button-icon reviews__button-icon-prev')
+          button.reviews__button
+            +icon('Short Arrow', 'reviews__button-icon reviews__button-icon-next')
+      include reviews-slider
+  include reviews-triangles
