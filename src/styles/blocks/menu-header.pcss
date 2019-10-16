@@ -1,6 +1,12 @@
-.main {
-  background: url('../images/content/MountainBaloon.jpg') center center / cover no-repeat;
-  background-color: #fff;
+.menu-container {
+  display: grid;
+  grid-template: 
+    "header" max-content
+    "content" 1fr
+    "scroll" max-content / 1fr;
+  /* grid-template-columns: 1fr;
+  grid-template-rows: max-content 1fr max-content; */
+  height: 100%;
 }
 
 .menu__header {
@@ -8,6 +14,7 @@
   justify-content: space-between;
   align-items: center;
   padding-top: 62px;
+  grid-area: header;
 }
 
 .header__logo {

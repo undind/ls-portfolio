@@ -1,20 +1,27 @@
 .author__content {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content max-content;
   text-align: center;
+  grid-area: content;
+  justify-self: center;
+  align-self: center;
 }
 
 .content__text {
   opacity: 0.4;
-  width: 15%;
-  margin: 0 auto 33px auto;
+  width: 35%;
+  justify-self: center;
+  /* margin: 0 auto 33px auto; */
 }
 
 .content__name {
   font-size: 72px;
   font-weight: 800;
   line-height: 60px;
-  width: 30%;
-  margin: 0 auto;
+  justify-self: center;
+  width: 90%;
+  margin-top: 20px;
+  /* width: 30%;
+  margin: 0 auto; */
 }
