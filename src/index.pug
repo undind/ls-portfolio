@@ -10,10 +10,25 @@ html(lang="en")
   body
     .wrapper
       .maincontent
-        .main
+        
+        section.parallax
+          .parallax__layer(data-speed="0.1")
+            +image(`parallax-header/1.png`, 'parallax__image')
+          .parallax__layer(data-speed="0.25")
+            +image(`parallax-header/2.png`, 'parallax__image')
+          .parallax__layer(data-speed="0.25")
+            +image(`parallax-header/3.png`, 'parallax__image')
+          .parallax__layer(data-speed="0.23")
+            +image(`parallax-header/4.png`, 'parallax__image')
+          .parallax__layer(data-speed="0.25")
+            +image(`parallax-header/5.png`, 'parallax__image')
+          .parallax__layer(data-speed="0.28")
+            +image(`parallax-header/6.png`, 'parallax__image')
+          .parallax__layer(data-speed="0")
+            +image(`parallax-header/7.png`, 'parallax__image')
 
           include components/menu-section
-          
+            
           include components/greeting-section
           
         include components/triangles
