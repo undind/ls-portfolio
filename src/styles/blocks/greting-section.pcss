@@ -12,11 +12,20 @@
 .greeting__content {
   display: flex;
   width: 70%;
+
+  @include desktop {
+    width: 100%;
+  }
 }
 
 .greeting__desc {
   width: 90%;
   margin-right: 55px;
+
+  @include desktop {
+    width: 65%;
+    margin-right: 95px;
+  }
 }
 
 .greeting__photo {
@@ -57,6 +66,11 @@
   font-weight: 600;
   width: 95%;
   line-height: 1.875;
+
+  @include desktop {
+    width: 75%;
+    margin-bottom: 99px;
+  }
 }
 
 .greeting__about {
@@ -65,6 +79,10 @@
   width: 95%;
   line-height: $l-height;
   position: relative;
+
+  @include desktop {
+    width: 76%;
+  }
 
   &::before {
     content: '*';

@@ -15,7 +15,7 @@
 
   &:nth-child(1) {
     & .parallax__image-mountain,
-      .parallax__image-budda {
+      .parallax__image-budda  {
       object-fit: cover;
       width: 100%;
       height: 100%;
@@ -26,6 +26,10 @@
     & .parallax__image-mountain {
       right: 0;
       top: 300px;
+
+      @include desktop {
+        top: 680px;
+      }
     }
 
     & .parallax__image-budda {
@@ -39,11 +43,23 @@
       top: 450px;
       left: 50%;
       margin-left: 12%;
+
+      @include desktop {
+        width: 200px;
+        height: 250px;
+        margin-left: 33%;
+        top: 570px;
+      }
     }
 
     & .parallax__image-budda {
       right: 7%;
       top: 400px;
+
+      @include desktop {
+        top: 460px;
+        right: -18%;
+      }
     }
   }
 
@@ -51,11 +67,19 @@
     & .parallax__image-mountain {
       left: 0;
       top: 510px;
+
+      @include desktop {
+        top: 790px;
+      }
     }
 
     & .parallax__image-budda {
       right: 0;
       bottom: -200px;
+
+      @include desktop {
+        bottom: -120px;
+      }
     }
   }
 
@@ -63,6 +87,11 @@
     & .parallax__image-mountain {
       left: 0;
       top: 700px;
+
+      @include desktop {
+        left: -180px;
+        top: 850px;
+      }
     }
 
     & .parallax__image-budda {
@@ -75,6 +104,10 @@
     & .parallax__image-mountain {
       right: 0;
       bottom: -100px;
+
+      @include desktop {
+        bottom: -150px;
+      }
     }
 
     & .parallax__image-budda {
@@ -87,6 +120,10 @@
     & .parallax__image-mountain {
       bottom: -250px;
       left: 0;
+
+      @include desktop {
+        bottom: -180px;
+      }
     }
   }
 }

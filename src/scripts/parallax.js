@@ -3,7 +3,6 @@ const parallax = document.querySelectorAll('.parallax');
 const layersMountains = parallax[0].children;
 const layersBudda = parallax[1].children;
 const top = parallax[1].getBoundingClientRect();
-console.log(top);
 
 
 function moveLayersDependsOnScroll(wScroll) {
@@ -17,11 +16,10 @@ function moveLayersDependsOnScroll(wScroll) {
 
 function moveLayersDependsOnScrollBudda() {
   const top = parallax[1].getBoundingClientRect().y;
-  Array.from(layersBudda).forEach(layer => {
-    
+  
+  Array.from(layersBudda).forEach(layer => {  
     const divider = layer.dataset.speed;
     if (top < 0) {
-      console.log(top);
       const strafe = Math.abs(top) * divider / 10;
       layer.style.transform = `translateY(-${strafe}%)`
     }

@@ -6,6 +6,10 @@
   grid-area: content;
   justify-self: center;
   align-self: center;
+
+  @include desktop {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .content__text {
@@ -13,6 +17,12 @@
   width: 35%;
   justify-self: center;
   /* margin: 0 auto 33px auto; */
+
+  @include desktop {
+    justify-self: right;
+    text-align: right;
+    margin-right: 20px;
+  }
 }
 
 .content__name {
@@ -24,4 +34,11 @@
   margin-top: 20px;
   /* width: 30%;
   margin: 0 auto; */
+
+  @include desktop {
+    margin-top: 0;
+    justify-self: left;
+    width: 100%;
+    text-align: justify;
+  }
 }

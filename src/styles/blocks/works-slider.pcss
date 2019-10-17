@@ -66,6 +66,12 @@
     outline: 3px solid #dc9322;
     outline-offset: -3px;
   }
+
+  &:last-child {
+    @include desktop {
+      display: none;
+    }
+  }
 }
 
 .slider__display-buttons {
