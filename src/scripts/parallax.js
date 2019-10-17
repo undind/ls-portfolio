@@ -1,8 +1,13 @@
-const parallax = document.querySelector('.parallax');
-const layers = parallax.children;
+const parallax = document.querySelectorAll('.parallax');
+
+const layersMountains = parallax[0].children;
+const layersBudda = parallax[1].children;
+const top = parallax[1].getBoundingClientRect();
+console.log(top);
+
 
 function moveLayersDependsOnScroll(wScroll) {
-  Array.from(layers).forEach(layer => {
+  Array.from(layersMountains).forEach(layer => {
     const divider = layer.dataset.speed;
     const strafe = wScroll * divider / 10;
 
@@ -10,7 +15,22 @@ function moveLayersDependsOnScroll(wScroll) {
   })
 };
 
+function moveLayersDependsOnScrollBudda() {
+  const top = parallax[1].getBoundingClientRect().y;
+  Array.from(layersBudda).forEach(layer => {
+    
+    const divider = layer.dataset.speed;
+    if (top < 0) {
+      console.log(top);
+      const strafe = Math.abs(top) * divider / 10;
+      layer.style.transform = `translateY(-${strafe}%)`
+    }
+  })
+};
+
 window.addEventListener('scroll', e => {
   const wScroll = window.pageYOffset;
+  
   moveLayersDependsOnScroll(wScroll);
+  moveLayersDependsOnScrollBudda(wScroll);
 });
