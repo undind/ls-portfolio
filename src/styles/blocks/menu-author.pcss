@@ -10,6 +10,11 @@
   @include desktop {
     grid-template-columns: 1fr 1fr;
   }
+
+  @include tablets {
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content max-content;
+  }
 }
 
 .content__text {
@@ -22,6 +27,14 @@
     justify-self: right;
     text-align: right;
     margin-right: 20px;
+    margin-bottom: 30px;
+    line-height: $l-height;
+  }
+
+  @include tablets {
+    margin-right: 0;
+    justify-self: center;
+    text-align: center;
   }
 }
 
@@ -40,5 +53,11 @@
     justify-self: left;
     width: 100%;
     text-align: justify;
+  }
+
+  @include tablets {
+    justify-self: center;
+    width: 99%;
+    text-align: center;
   }
 }

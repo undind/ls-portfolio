@@ -1,34 +1,29 @@
-const parallax = document.querySelectorAll('.parallax');
+const mountainsParallax = document.querySelector('.mountains-parallax');
+const mountainsLayers = mountainsParallax.children;
 
-const layersMountains = parallax[0].children;
-const layersBudda = parallax[1].children;
-const top = parallax[1].getBoundingClientRect();
+const buddaParallax = document.querySelector('.budda-parallax');
+const buddasLayers = buddaParallax.children;
 
-
-function moveLayersDependsOnScroll(wScroll) {
-  Array.from(layersMountains).forEach(layer => {
-    const divider = layer.dataset.speed;
-    const strafe = wScroll * divider / 10;
-
-    layer.style.transform = `translateY(-${strafe}%)`
-  })
-};
-
-function moveLayersDependsOnScrollBudda() {
-  const top = parallax[1].getBoundingClientRect().y;
-  
-  Array.from(layersBudda).forEach(layer => {  
-    const divider = layer.dataset.speed;
-    if (top < 0) {
-      const strafe = Math.abs(top) * divider / 10;
-      layer.style.transform = `translateY(-${strafe}%)`
+function moveLayersDependsOnScroll(layers, wScroll) { 
+  [...layers].forEach((layer) => {
+    if (layer.dataset.speed) {
+      const offset = -wScroll / layer.dataset.speed;
+      layer.style.transform = `translate3d(0, ${offset}px, 0)`;
     }
   })
 };
 
-window.addEventListener('scroll', e => {
+window.addEventListener('scroll', () => {
+  if (window.innerWidth < 768) {
+    return;
+  }
   const wScroll = window.pageYOffset;
-  
-  moveLayersDependsOnScroll(wScroll);
-  moveLayersDependsOnScrollBudda(wScroll);
+
+  moveLayersDependsOnScroll(mountainsLayers, wScroll);
+
+  const { top } = buddaParallax.getBoundingClientRect(); 
+  const isBuddaParallaxOffSet = window.innerHeight - top;
+  if (isBuddaParallaxOffSet > 0) {
+    moveLayersDependsOnScroll(buddasLayers, wScroll);
+  }
 });

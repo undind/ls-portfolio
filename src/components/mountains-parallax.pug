@@ -1,0 +1,7 @@
+.mountains-parallax
+  - var layers = [['sky', 30], ['mountains', 5], ['baloon', 4], ['clouds', 3], ['men', 0], ['hill', 30], ['bottom-cliuds', 0]]
+    each layer, index in layers
+      - var i = index + 1
+        .mountains-parallax__layer(data-speed=layer[1])
+          picture
+            img.mountains-parallax__img(src=require(`images/parallax/mountains/${i}.${i === 1 ? 'jpg' : 'png'}`))
