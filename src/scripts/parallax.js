@@ -18,7 +18,6 @@ window.addEventListener('scroll', () => {
     return;
   }
   const wScroll = window.pageYOffset;
-
   moveLayersDependsOnScroll(mountainsLayers, wScroll);
 
   const { top } = buddaParallax.getBoundingClientRect(); 

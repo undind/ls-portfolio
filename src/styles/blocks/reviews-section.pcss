@@ -32,13 +32,18 @@
   transition: all .3s;
   margin-right: 28px;
 
-  &:hover {
+  &:not(:disabled):hover {
     border-color: $links-color;
 
     & .reviews__button-icon {
       fill: $links-color;
       transition: all .3s;
     }
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
   }
 }
 
