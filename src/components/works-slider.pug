@@ -1,17 +1,60 @@
-.works__slider
-  .works__slider-display
-    .slider__display(data-index="4")
-      .slider__display-current
-        +image('slider/1.jpg', 'slider__display-img')
-      .slider__display-thumbs
-        .slider__thumbs
-          +slider-thumbs([4, 3, 2, 1], 1)
-          //- - for (var i = 1; i < 5; i++)
-          //-   .slider__thumbs-item
-          //-     +image(`slider/${i}.jpg`, 'slider__thumbs-img')
-      .slider__display-buttons
-        .slider-buttons
-          button.slider__button
-            +icon('Short Arrow', 'slider__button-icon slider__button-icon-prev')
-          button.slider__button
-            +icon('Short Arrow', 'slider__button-icon slider__button-icon-next')
+script(type="text/x-template")#slider-container
+  .works__slider
+    display(
+      :works="works"
+      :current-work="currentWork"
+      :current-index="currentIndex"
+      @slide="handleSlide"
+    )
+    info(
+      :current-work="currentWork"
+    )
+
+script(type="text/x-template")#slider-display
+  .works__slider-content
+    .works__slider-display
+      .slider__display(:data-index="currentIndex + 1")
+        .slider__display-current
+          img(:src="currentWork.photo" alt="").slider__display-img
+        thumbs(
+          :works="works"
+          :current-work="currentWork"
+        )
+        btns(
+          @slide="$emit('slide', $event)"
+        )
+
+script(type="text/x-template")#slider-thumbs
+  .slider__display-thumbs
+    .slider__thumbs
+      a.slider__thumbs-item( 
+        v-for="work in works"
+        :key="work.id"
+        :class="{active: work.id === currentWork.id}"
+      )
+        img(:src="work.photo" class="slider__thumbs-img" alt="")
+
+script(type="text/x-template")#slider-btns
+  .slider__display-buttons
+    .slider-buttons
+      button(@click.prevent="$emit('slide', 'prev')").slider__button.slider__button-prev
+        +icon('Short Arrow', 'slider__button-icon slider__button-icon-prev')
+      button(@click.prevent="$emit('slide', 'next')").slider__button.slider__button-next
+        +icon('Short Arrow', 'slider__button-icon slider__button-icon-next')
+
+script(type="text/x-template")#slider-info
+  .works__slider-info
+    .slider-info
+      tags(
+        :tags="tagsArray"
+      )
+      .slider-info__title {{currentWork.title}}
+      .slider-info__desc {{currentWork.desc}}
+      a.slider-info__link(:href="currentWork.link" target="_blank")
+        +icon('Link', 'slider-info__link-icon')
+        .slider-info__link-text Посмотреть сайт
+
+script(type="text/x-template")#slider-tags
+  .slider-info__tags
+    ul.slider__tags
+      li.slider__tags-item(v-for="tag in tags" :key="tag") {{tag}}

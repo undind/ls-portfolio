@@ -13,6 +13,8 @@ new Vue({
     flickityOptions: {
     pageDots: false,
     prevNextButtons: false,
+    adaptiveHeight: true,
+    watchCSS: false,
     cellAlign: 'left',
     groupCells: window.innerWidth > 768 ? 2 : 1,
     },

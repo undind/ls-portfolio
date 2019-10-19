@@ -1,46 +1,80 @@
 import Vue from "vue";
 
-const skill = {
-  template: "#skill",
-  props: ["skillName", "skillPercent"],
-  methods: {
-    drawColoredCircle(value) {
-      const circle = this.$refs["color-circle"];
-      const dashArray = parseInt(
-        getComputedStyle(circle).getPropertyValue("stroke-dasharray")
-      );
-      const percent = (dashArray / 100) * (100 - value);
-      
-      circle.style.strokeDashoffset = percent;
-    },
-    onIntersecting(entries) {
-      entries.forEach((entry) => {
-        if (entry.target === this.$el) {
-          const value = entry.isIntersecting ? this.skillPercent : 0;
-          this.drawColoredCircle(value);
-        }
-      });
-    }
-  },
-  mounted() {
-    this.drawColoredCircle();
-
-    const observer = new IntersectionObserver(this.onIntersecting);
-    observer.observe(this.$el);
-  },
+const thumbs = {
+  template: "#slider-thumbs",
+  props: ["works", "currentWork"]
 };
 
-const skillsRow = {
-  template: "#skills-row",
-  components: { skill },
-  props: ["skill"]
+const btns = {
+  template: "#slider-btns"
+};
+
+const display = {
+  template: "#slider-display",
+  components: { thumbs, btns },
+  props: ["works", "currentWork", "currentIndex"]
+};
+
+const tags = {
+  template: "#slider-tags",
+  props: ["tags"]
+};
+
+const info = {
+  template: "#slider-info",
+  components: { tags },
+  props: ["currentWork"],
+  computed: {
+    tagsArray() {
+      return this.currentWork.skills.split(', ');
+    }
+  },
 };
 
 new Vue({
-  el: "#skills-components",
-  template: "#skills-list",
-  created() {
-    this.skills = require('../data/skills.json');
+  el: "#slider-component",
+  template: "#slider-container",
+  components: { display, info },
+  data: () => ({
+    works: [],
+    currentIndex: 0
+  }),
+  computed: {
+    currentWork() {
+      return this.works[this.currentIndex];
+    }
   },
-  components: { skillsRow }
+  watch: {
+    currentIndex(value) {
+      this.makeInfiniteLoop(value);
+    }
+  },
+  methods: {
+    makeInfiniteLoop(value) {
+      const worksAmount = this.works.length - 1;
+      if (value < 0) this.currentIndex = worksAmount;
+      if (value > worksAmount) this.currentIndex = 0;
+    },
+    makeArrayWithRequiredImg(data) {
+      return data.map(item => {
+        const requiredPic = require(`../images/slider/${item.photo}`);
+        item.photo = requiredPic;
+        return item;
+      })
+    },
+    handleSlide(direction) {
+      switch(direction) {
+        case "next":
+          this.currentIndex++;
+          break;
+        case "prev":
+          this.currentIndex--;
+          break;
+      }
+    }
+  },
+  created() {
+    const data = require('../data/works.json');
+    this.works = this.makeArrayWithRequiredImg(data);
+  },
 });
