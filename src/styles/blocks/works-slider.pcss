@@ -12,6 +12,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @include phones {
+    width: 100vw;
+  }
 }
 
 .slider__display {
@@ -50,6 +54,10 @@
   width: calc(100% - 10vw);
   height: 100%;
   z-index: 1;
+
+  @include phones {
+    width: 100vw;
+  }
 }
 
 .slider__display-img {
@@ -61,6 +69,7 @@
 
 .works__slider-display {
   flex-grow: 1;
+  height: 100%;
 }
 
 .slider__display-thumbs {
@@ -72,6 +81,10 @@
   height: 100%;
   z-index: 1;
   overflow: hidden;
+
+  @include phones {
+    display: none;
+  }
 }
 
 .slider__thumbs {
@@ -100,6 +113,12 @@
 .slider__display-buttons {
   position: absolute;
   right: 10vw;
+
+  @include phones {
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+  }
 }
 
 .slider-buttons {

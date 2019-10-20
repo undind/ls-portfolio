@@ -25,6 +25,10 @@
   @include tablets {
     padding-left: 0;
   }
+
+  @include phones {
+    width: 100%;
+  }
 }
 
 .reviews__item-desc {
@@ -34,6 +38,10 @@
 
   @include tablets {
     width: 80%;
+  }
+
+  @include phones {
+    width: 100%;
   }
 }
 
@@ -90,4 +98,8 @@
 
 .carousel-cell {
   min-height: 240px;
+  
+  @include phones {
+    min-height: 185px;
+  }
 }

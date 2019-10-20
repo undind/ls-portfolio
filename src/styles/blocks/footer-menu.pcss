@@ -11,6 +11,11 @@
   @include tablets {
     width: 52%;
   }
+
+  @include phones {
+    width: 100%;
+    margin-bottom: 39px;
+  }
 }
 
 .footer__copyright-year {
@@ -34,6 +39,10 @@
   @include desktop {
     width: 60%;
   }
+
+  @include phones {
+    width: 100%;
+  }
 }
 
 .footer__copyright-name {
@@ -42,6 +51,10 @@
   line-height: 1.66666;
   text-transform: uppercase;
   margin-bottom: 17px;
+
+  @include phones {
+    margin-bottom: 5px;
+  }
 }
 
 .footer__copyright-desc {

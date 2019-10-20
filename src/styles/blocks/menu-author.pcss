@@ -21,7 +21,6 @@
   opacity: 0.4;
   width: 35%;
   justify-self: center;
-  /* margin: 0 auto 33px auto; */
 
   @include desktop {
     justify-self: right;
@@ -36,6 +35,10 @@
     justify-self: center;
     text-align: center;
   }
+
+  @include phones {
+    width: 46%;
+  }
 }
 
 .content__name {
@@ -45,8 +48,6 @@
   justify-self: center;
   width: 90%;
   margin-top: 20px;
-  /* width: 30%;
-  margin: 0 auto; */
 
   @include desktop {
     margin-top: 0;
@@ -59,5 +60,10 @@
     justify-self: center;
     width: 99%;
     text-align: center;
+  }
+
+  @include phones {
+    width: 100%;
+    font-size: 56px;
   }
 }

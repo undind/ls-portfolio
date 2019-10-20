@@ -2,12 +2,21 @@
   padding-top: 269px;
   padding-bottom: 100px;
   position: relative;
+
+  @include phones {
+    padding-top: 100px;
+  }
 }
 
 .reviews-about__header {
   display: flex;
   align-items: center;
   margin-bottom: 92px;
+
+  @include phones {
+    flex-direction: column;
+    margin-bottom: 35px;
+  }
 }
 
 .reviews-about__title {
@@ -17,6 +26,12 @@
 
   @include tablets {
     margin-right: 30px;
+  }
+
+  @include phones {
+    margin-right: 0;
+    margin-bottom: 30px;
+    font-size: 24px;
   }
 }
 
@@ -42,6 +57,12 @@
     & .reviews__button-icon {
       fill: $links-color;
       transition: all .3s;
+    }
+  }
+
+  &:nth-child(2) {
+    @include phones {
+      margin-right: 0;
     }
   }
 

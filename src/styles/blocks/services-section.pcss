@@ -5,6 +5,10 @@
   @include tablets {
     padding-bottom: 470px;
   }
+
+  @include phones {
+    padding-bottom: 370px;
+  }
 }
 
 .service-container {
@@ -30,6 +34,10 @@
     width: 100%;
     text-align: center;
   }
+
+  @include phones {
+    text-align: left;
+  }
 }
 
 .services__title {
@@ -45,6 +53,10 @@
     margin-bottom: 30px;
     line-height: 1.2;
   }
+
+  @include phones {
+    width: 100%;
+  }
 }
 
 .services__desc {
@@ -59,6 +71,10 @@
     width: 59%;
     margin-left: 0;
     margin-bottom: 60px;
+  }
+
+  @include phones {
+    width: 100%;
   }
 }
 
@@ -78,5 +94,9 @@
     left: 50%;
     top: 110%;
     transform: translateX(-50%);
+  }
+
+  @include phones {
+    top: 100%;
   }
 }

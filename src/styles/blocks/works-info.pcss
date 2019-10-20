@@ -7,6 +7,11 @@
     text-align: center;
     margin-top: 100px;
   }
+
+  @include phones {
+    text-align: left;
+    width: 100%;
+  }
 }
 
 .slider-info__tags {
@@ -63,6 +68,10 @@
 
   @include tablets {
     justify-content: center;
+  }
+
+  @include phones {
+    justify-content: flex-start;
   }
 }
 

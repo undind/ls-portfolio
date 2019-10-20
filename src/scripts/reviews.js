@@ -16,12 +16,12 @@ new Vue({
     adaptiveHeight: true,
     watchCSS: false,
     cellAlign: 'left',
-    groupCells: window.innerWidth > 768 ? 2 : 1,
+    groupCells: window.innerWidth > 480 ? 2 : 1,
     },
   },
   computed: {
     slidesLength() {
-      return window.innerWidth > 768 ? Math.ceil(this.reviews.length / 2) : this.reviews.length;
+      return window.innerWidth > 480 ? Math.ceil(this.reviews.length / 2) : this.reviews.length;
     },
   },
   methods: {
