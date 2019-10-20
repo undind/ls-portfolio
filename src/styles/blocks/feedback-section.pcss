@@ -1,10 +1,19 @@
 .feedback {
   padding-top: 90px;
   padding-bottom: 130px;
+
+  @include tablets {
+    padding-top: 20px;
+  }
 }
 
 .feedback__title {
   font-size: 36px;
   font-weight: 700;
   margin-bottom: 106px;
+
+  @include tablets {
+    text-align: center;
+    margin-bottom: 70px;
+  }
 }

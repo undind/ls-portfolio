@@ -5,6 +5,7 @@ script(type="text/x-template")#slider-container
       :current-work="currentWork"
       :current-index="currentIndex"
       @slide="handleSlide"
+      @image="switchImg"
     )
     info(
       :current-work="currentWork"
@@ -19,6 +20,7 @@ script(type="text/x-template")#slider-display
         thumbs(
           :works="works"
           :current-work="currentWork"
+          @image="$emit('image', $event)"
         )
         btns(
           @slide="$emit('slide', $event)"
@@ -31,6 +33,7 @@ script(type="text/x-template")#slider-thumbs
         v-for="work in works"
         :key="work.id"
         :class="{active: work.id === currentWork.id}"
+        @click.prevent="$emit('image', 'img-link')"
       )
         img(:src="work.photo" class="slider__thumbs-img" alt="")
 

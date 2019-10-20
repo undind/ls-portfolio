@@ -1,6 +1,10 @@
 .skills__row {
   display: grid;
   justify-items: right;
+
+  @include tablets {
+    justify-items: center;
+  }
 }
 
 .skills__group {
@@ -13,6 +17,11 @@
   @include desktop {
     width: 65%;
   }
+
+  @include tablets {
+    width: 90%;
+    align-items: center;
+  }
 }
 
 .skills__group-title {
@@ -21,6 +30,10 @@
   font-weight: 700;
   line-height: 1;
   margin-bottom: 33px;
+
+  @include tablets {
+    align-self: center;
+  }
 }
 
 .skills__group-items {
@@ -29,6 +42,10 @@
   justify-content: space-between;
   flex-wrap: wrap;
   margin-right: auto;
+
+  @include tablets {
+    margin-right: 0;
+  }
 }
 
 .skill {

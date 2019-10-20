@@ -4,6 +4,17 @@
   @include desktop {
     width: 75%;
   }
+
+  @include desktop {
+    width: 100%;
+  }
+}
+
+.form__elem {
+  @include tablets {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .form__row {
@@ -104,6 +115,10 @@
   background-color: #ffffff;
   padding: 31px 118px;
   z-index: 100;
+
+  @include tablets {
+    align-self: center;
+  }
 
   &:before {
     border-radius: inherit;

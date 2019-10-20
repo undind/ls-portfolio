@@ -47,7 +47,7 @@ new Vue({
   watch: {
     currentIndex(value) {
       this.makeInfiniteLoop(value);
-    }
+    },
   },
   methods: {
     makeInfiniteLoop(value) {
@@ -71,6 +71,9 @@ new Vue({
           this.currentIndex--;
           break;
       }
+    },
+    switchImg() {
+      // this.currentIndex = this.currentWork.id;
     }
   },
   created() {
