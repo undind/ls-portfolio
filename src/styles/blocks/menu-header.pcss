@@ -33,6 +33,48 @@
   @include tablets {
     display: none;
   }
+
+  &.active {
+    position: fixed;
+    width: 50%;
+    height: 100%;
+    right: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    z-index: 99;
+    font-size: 18px;
+    font-weight: 600;
+
+    @include phones {
+      width: 100%;
+    }
+
+    & .nav {
+      display: flex;
+      height: 30%;
+      margin-left: -100px;
+      margin-bottom: 60px;
+    }
+
+    & .nav__list {
+      flex-direction: column;
+      text-align: left;
+      justify-content: space-between;
+    }
+
+    & .header__menu-socials {
+      display: block;
+      margin-left: -100px;
+
+      & .social__list {
+        width: 200%;
+      }
+    }
+  }
 }
 
 .nav__list {
@@ -45,4 +87,8 @@
   &:hover {
     color: $links-color;
   }
+}
+
+.header__menu-socials {
+  display: none;
 }

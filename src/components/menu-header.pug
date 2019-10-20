@@ -1,2 +1,5 @@
-.header__menu
+.header__menu.animated.fadeInRight#hamburgerMenu
   +nav-menu('nav', [ ["Главная", "menu"], ["Обо мне", "greeting"], ["Навыки", "service"], ["Работы", "works"], ["Отзывы", "reviews"], ["Связаться", "feedback"] ] )
+  - var headerItems = ['Instagram', 'Vkontakte', 'Github']
+  .header__menu-socials
+    +socials(headerItems)
