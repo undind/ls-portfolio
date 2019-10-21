@@ -33,7 +33,7 @@ script(type="text/x-template")#slider-thumbs
         v-for="work in works"
         :key="work.id"
         :class="{active: work.id === currentWork.id}"
-        @click.prevent="$emit('image', 'img-link')"
+        @click.prevent="$emit('image', work.id)"
       )
         img(:src="work.photo" class="slider__thumbs-img" alt="")
 

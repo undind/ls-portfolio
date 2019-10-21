@@ -42,7 +42,10 @@ new Vue({
   computed: {
     currentWork() {
       return this.works[this.currentIndex];
-    }
+    },
+    // slidesLength() {
+    //   return window.innerWidth < 768 ? (this.works.splice(3)) : this.works.length;
+    // }
   },
   watch: {
     currentIndex(value) {
@@ -72,12 +75,16 @@ new Vue({
           break;
       }
     },
-    switchImg() {
-      // this.currentIndex = this.currentWork.id;
+    switchImg(id) {
+      this.currentIndex = this.works.findIndex((work) => work.id === id);
     }
   },
   created() {
     const data = require('../data/works.json');
     this.works = this.makeArrayWithRequiredImg(data);
+
+    // if (window.innerWidth < 768) {
+    //   this.works.splice(3);
+    // }
   },
 });
