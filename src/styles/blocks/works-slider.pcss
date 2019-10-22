@@ -64,7 +64,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top;
+  object-position: top center;
 }
 
 .works__slider-display {
@@ -72,15 +72,24 @@
   height: 100%;
 }
 
+.slider__display-list {
+  transition: all 0.3s ease;
+}
+
 .slider__display-thumbs {
   display: flex;
-  justify-content: flex-end;
+  align-items: flex-end;
   position: absolute;
   bottom: 0;
   right: 10vw;
-  height: 100%;
+  height: 400px;
+  width: 178px;
   z-index: 1;
   overflow: hidden;
+
+  @include desktopHd {
+    height: 300px;
+  }
 
   @include phones {
     display: none;
@@ -90,11 +99,17 @@
 .slider__thumbs {
   display: flex;
   flex-direction: column-reverse;
+  height: 400px;
+
+  @include desktopHd {
+    height: 300px;
+  }
 }
 
 .slider__thumbs-item {
   position: relative;
   width: 178px;
+  height: 100px;
   flex-shrink: 0;
   cursor: pointer;
   transition: outline 0.1s;
@@ -108,6 +123,12 @@
     outline: 3px solid $links-color;
     outline-offset: -3px;
   }
+}
+
+.slider__thumbs-img {
+  width: 100%;
+  object-fit: cover;
+  object-position: top center;
 }
 
 .slider__display-buttons {
@@ -135,11 +156,11 @@
   align-items: center;
   transition: background-color .3s;
 
-  &:not(:disabled):hover {
+  &:not(.slider__button-disabled):hover {
     background-color: #5500f2;
   }
 
-  &:disabled {
+  &-disabled {
     & .slider__button-icon {
       opacity: 0.3;
     }

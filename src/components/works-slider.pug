@@ -3,9 +3,8 @@ script(type="text/x-template")#slider-container
     display(
       :works="works"
       :current-work="currentWork"
-      :current-index="currentIndex"
-      @slide="handleSlide"
-      @image="switchImg"
+      :current-index="currentWorkIndex"
+      @change-slide="changeSlide"
     )
     info(
       :current-work="currentWork"
@@ -17,32 +16,42 @@ script(type="text/x-template")#slider-display
       .slider__display(:data-index="currentIndex + 1")
         .slider__display-current
           img(:src="currentWork.photo" alt="").slider__display-img
-        thumbs(
-          :works="works"
-          :current-work="currentWork"
-          @image="$emit('image', $event)"
-        )
+        .slider__display-thumbs
+          .slider__display-list(:style="`transform: translateY(${offset*100/maxThumbsCount}%)`")
+            thumbs(
+              :works="works"
+              :current-index="currentIndex"
+              @change-slide="goToSlide"
+            )
         btns(
-          @slide="$emit('slide', $event)"
+          :is-disabled-prev="currentIndex === 0"
+          :is-disabled-next="currentIndex === works.length - 1"
+          @prev-slide="goToPrevSlide"
+          @next-slide="goToNextSlide"
         )
 
 script(type="text/x-template")#slider-thumbs
-  .slider__display-thumbs
-    .slider__thumbs
-      a.slider__thumbs-item( 
-        v-for="work in works"
-        :key="work.id"
-        :class="{active: work.id === currentWork.id}"
-        @click.prevent="$emit('image', work.id)"
-      )
-        img(:src="work.photo" class="slider__thumbs-img" alt="")
+  .slider__thumbs
+    .slider__thumbs-item( 
+      v-for="(work, index) in works"
+      :key="index"
+      :class="{ 'active': index === currentIndex }"
+      @click="$emit('change-slide', index)"
+    )
+      img(:src="work.photo" class="slider__thumbs-img" alt="")
 
 script(type="text/x-template")#slider-btns
   .slider__display-buttons
     .slider-buttons
-      button(@click.prevent="$emit('slide', 'prev')").slider__button.slider__button-prev
+      button.slider__button.slider__button-prev(
+        :class="{ 'slider__button-disabled': isDisabledPrev }"
+        @click="onPrevButtonClick"
+      )
         +icon('Short Arrow', 'slider__button-icon slider__button-icon-prev')
-      button(@click.prevent="$emit('slide', 'next')").slider__button.slider__button-next
+      button.slider__button.slider__button-next(
+        :class="{ 'slider__button-disabled': isDisabledNext }"
+        @click="onNextButtonClick"
+      )
         +icon('Short Arrow', 'slider__button-icon slider__button-icon-next')
 
 script(type="text/x-template")#slider-info

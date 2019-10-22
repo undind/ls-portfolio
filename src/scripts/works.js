@@ -1,18 +1,105 @@
 import Vue from "vue";
+import constants from '../styles/variables.json';
 
 const thumbs = {
   template: "#slider-thumbs",
-  props: ["works", "currentWork"]
+  props: ["works", "currentIndex"]
 };
 
 const btns = {
-  template: "#slider-btns"
+  template: "#slider-btns",
+  props: {
+    isDisabledPrev: {
+      type: Boolean,
+    },
+    isDisabledNext: {
+      type: Boolean,
+    }
+  },
+  methods: {
+    onPrevButtonClick() {
+      if (!this.isDisabledPrev) {
+        this.$emit('prev-slide');
+      }
+    },
+    onNextButtonClick() {
+      if (!this.isDisabledNext) {
+        this.$emit('next-slide');
+      }
+    },
+  },
 };
 
 const display = {
   template: "#slider-display",
   components: { thumbs, btns },
-  props: ["works", "currentWork", "currentIndex"]
+  props: {
+    works: {
+      type: Array,
+    },
+    currentWork: {
+      type: Object,
+    },
+    currentIndex: {
+      type: Number,
+    },
+  },
+  watch: {
+    currentIndex(currentIndex) {
+      if (currentIndex < this.offset) {
+        this.offset = currentIndex;
+      } else if (currentIndex > this.offset + this.maxThumbsCount - 1) {
+        this.offset = currentIndex - this.maxThumbsCount + 1;
+      }
+    },
+  },
+  data() {
+    return {
+      windowWidth: 0,
+      offset: 0,
+    };
+  },
+  computed: {
+    maxThumbsCount() {
+      if (this.windowWidth < parseInt(constants['bp-phones'])) {
+        return 0;
+      }
+      if (this.windowWidth < parseInt(constants['bp-tablets'])) {
+        return 2;
+      }
+      if (this.windowWidth < parseInt(constants['bp-desktop-hd']) + 1) {
+        return 3;
+      }
+      return 4;
+    }
+  },
+  methods: {
+    goToPrevSlide() {
+      if (this.currentIndex > 0) {
+        this.goToSlide(this.currentIndex - 1);
+      } 
+    },
+    goToNextSlide() {
+      if (this.currentIndex < this.works.length - 1) {
+        this.goToSlide(this.currentIndex + 1);
+      }
+    },
+    goToSlide(index) {
+      this.$emit('change-slide', index)
+    },
+    setWindowWidth() {
+      this.windowWidth = window.innerWidth;
+    }
+  },
+  mounted() {
+    this.setWindowWidth();
+  },
+  created() {
+    window.addEventListener('resize', this.setWindowWidth);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.setWindowWidth);
+  },
 };
 
 const tags = {
@@ -37,27 +124,14 @@ new Vue({
   components: { display, info },
   data: () => ({
     works: [],
-    currentIndex: 0
+    currentWorkIndex: 0
   }),
   computed: {
     currentWork() {
-      return this.works[this.currentIndex];
-    },
-    // slidesLength() {
-    //   return window.innerWidth < 768 ? (this.works.splice(3)) : this.works.length;
-    // }
-  },
-  watch: {
-    currentIndex(value) {
-      this.makeInfiniteLoop(value);
+      return this.works[this.currentWorkIndex];
     },
   },
   methods: {
-    makeInfiniteLoop(value) {
-      const worksAmount = this.works.length - 1;
-      if (value < 0) this.currentIndex = worksAmount;
-      if (value > worksAmount) this.currentIndex = 0;
-    },
     makeArrayWithRequiredImg(data) {
       return data.map(item => {
         const requiredPic = require(`../images/slider/${item.photo}`);
@@ -65,26 +139,12 @@ new Vue({
         return item;
       })
     },
-    handleSlide(direction) {
-      switch(direction) {
-        case "next":
-          this.currentIndex++;
-          break;
-        case "prev":
-          this.currentIndex--;
-          break;
-      }
-    },
-    switchImg(id) {
-      this.currentIndex = this.works.findIndex((work) => work.id === id);
+    changeSlide(value) {
+      this.currentWorkIndex = value;
     }
   },
   created() {
     const data = require('../data/works.json');
     this.works = this.makeArrayWithRequiredImg(data);
-
-    // if (window.innerWidth < 768) {
-    //   this.works.splice(3);
-    // }
   },
 });
