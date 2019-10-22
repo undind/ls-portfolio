@@ -1,11 +1,35 @@
 .works__slider {
   display: flex;
+
+  @include tablets {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.works__slider-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include phones {
+    width: 100vw;
+  }
 }
 
 .slider__display {
   position: relative;
   width: 100%;
   height: 29vw;
+
+  @include desktop {
+    height: 36vw;
+  }
+
+  @include tablets {
+    height: 52vw;
+  }
 
   &::after {
     content: attr(data-index);
@@ -16,6 +40,12 @@
     font-size: 22vw;
     font-weight: 900;
     line-height: .78;
+
+    @include tablets {
+      right: -7%;
+      top: -3%;
+      font-size: 38vw;
+    }
   }
 }
 
@@ -24,25 +54,37 @@
   width: calc(100% - 10vw);
   height: 100%;
   z-index: 1;
+
+  @include phones {
+    width: 100vw;
+  }
 }
 
 .slider__display-img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
 }
 
 .works__slider-display {
   flex-grow: 1;
+  height: 100%;
 }
 
 .slider__display-thumbs {
   display: flex;
   justify-content: flex-end;
   position: absolute;
-  top: 0;
+  bottom: 0;
   right: 10vw;
   height: 100%;
   z-index: 1;
   overflow: hidden;
+
+  @include phones {
+    display: none;
+  }
 }
 
 .slider__thumbs {
@@ -58,12 +100,12 @@
   transition: outline 0.1s;
 
   &:hover {
-    outline: 3px solid #5500f2;
+    outline: 3px solid $links-color;
     outline-offset: -3px;
   }
 
   &.active {
-    outline: 3px solid #dc9322;
+    outline: 3px solid $links-color;
     outline-offset: -3px;
   }
 }
@@ -71,6 +113,12 @@
 .slider__display-buttons {
   position: absolute;
   right: 10vw;
+
+  @include phones {
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+  }
 }
 
 .slider-buttons {
@@ -81,15 +129,20 @@
   width: 50px;
   height: 50px;
   padding: 0;
-  outline: none;
   background-color: #353e4e;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: background-color .3s;
 
-  &:hover {
+  &:not(:disabled):hover {
     background-color: #5500f2;
+  }
+
+  &:disabled {
+    & .slider__button-icon {
+      opacity: 0.3;
+    }
   }
 }
 
@@ -101,7 +154,6 @@
 
 .slider__button-icon-prev {
   transform: rotate(90deg);
-  opacity: 0.3;
 }
 
 .slider__button-icon-next {

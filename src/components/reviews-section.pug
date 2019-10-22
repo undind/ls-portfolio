@@ -1,12 +1,12 @@
-section.reviews
+section.reviews#reviews
   .container
-    .reviews-about
+    .reviews-about#reviews
       .reviews-about__header
         .reviews-about__title Что обо мне говорят
         .reviews-about__buttons
-          button.reviews__button
+          button.reviews__button(@click="previous()" :disabled="currentIndex === 0")
             +icon('Short Arrow', 'reviews__button-icon reviews__button-icon-prev')
-          button.reviews__button
+          button.reviews__button(@click="next()" :disabled="currentIndex === slidesLength - 1")
             +icon('Short Arrow', 'reviews__button-icon reviews__button-icon-next')
       include reviews-slider
   include reviews-triangles

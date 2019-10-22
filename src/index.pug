@@ -10,10 +10,13 @@ html(lang="en")
   body
     .wrapper
       .maincontent
-        .main
+        
+        .welcome-section
+
+          include components/mountains-parallax
 
           include components/menu-section
-          
+            
           include components/greeting-section
           
         include components/triangles
@@ -22,9 +25,15 @@ html(lang="en")
 
         include components/works-section
 
-        .budda-wrapper
-        
+        .contacts-section
+
+          include components/budda-parallax
+
           include components/reviews-section
+
           include components/feedback-section
 
         include components/footer-section
+  
+    include components/service-skills
+    include components/works-slider

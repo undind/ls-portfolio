@@ -1,23 +1,48 @@
 .reviews__slider {
   width: 68%;
   overflow: hidden;
+
+  @include desktop {
+    width: 81%;
+  }
+
+  @include tablets {
+    width: 100%;
+  }
 }
 
 .reviews__list {
   display: flex;
-  justify-content: space-around;
   width: 100%;
 }
 
 .reviews__item {
   display: flex;
-  width: 45%;
+  width: 50%;
+  flex-shrink: 0;
+  padding-left: 25px;
+
+  @include tablets {
+    padding-left: 0;
+  }
+
+  @include phones {
+    width: 100%;
+  }
 }
 
 .reviews__item-desc {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @include tablets {
+    width: 80%;
+  }
+
+  @include phones {
+    width: 100%;
+  }
 }
 
 .reviews__item-text {
@@ -59,4 +84,22 @@
   fill: #464d62;
   opacity: 0.05;
   margin-right: 26px;
+
+  @include tablets {
+    width: 35px;
+    height: 31px;
+    margin-right: 10px;
+  }
+}
+
+.flickity-viewport {
+  min-height: 240px;
+}
+
+.carousel-cell {
+  min-height: 240px;
+  
+  @include phones {
+    min-height: 185px;
+  }
 }

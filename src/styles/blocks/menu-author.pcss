@@ -1,20 +1,69 @@
 .author__content {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content max-content;
   text-align: center;
+  grid-area: content;
+  justify-self: center;
+  align-self: center;
+
+  @include desktop {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include tablets {
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content max-content;
+  }
 }
 
 .content__text {
   opacity: 0.4;
-  width: 15%;
-  margin: 0 auto 33px auto;
+  width: 35%;
+  justify-self: center;
+
+  @include desktop {
+    justify-self: right;
+    text-align: right;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    line-height: $l-height;
+  }
+
+  @include tablets {
+    margin-right: 0;
+    justify-self: center;
+    text-align: center;
+  }
+
+  @include phones {
+    width: 46%;
+  }
 }
 
 .content__name {
   font-size: 72px;
   font-weight: 800;
   line-height: 60px;
-  width: 30%;
-  margin: 0 auto;
+  justify-self: center;
+  width: 90%;
+  margin-top: 20px;
+
+  @include desktop {
+    margin-top: 0;
+    justify-self: left;
+    width: 100%;
+    text-align: justify;
+  }
+
+  @include tablets {
+    justify-self: center;
+    width: 99%;
+    text-align: center;
+  }
+
+  @include phones {
+    width: 100%;
+    font-size: 56px;
+  }
 }

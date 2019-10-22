@@ -1,16 +1,35 @@
 .works__slider-info {
   width: 345px;
   flex-shrink: 0;
+
+  @include tablets {
+    width: 550px;
+    text-align: center;
+    margin-top: 100px;
+  }
+
+  @include phones {
+    text-align: left;
+    width: 100%;
+  }
 }
 
 .slider-info__tags {
   margin-bottom: 29px;
+
+  @include tablets {
+    margin-bottom: 20px;
+  }
 }
 
 .slider__tags {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+
+  @include tablets {
+    justify-content: center;
+  }
 }
 
 .slider__tags-item {
@@ -46,6 +65,14 @@
   display: flex;
   align-items: center;
   color: #586ed3;
+
+  @include tablets {
+    justify-content: center;
+  }
+
+  @include phones {
+    justify-content: flex-start;
+  }
 }
 
 .slider-info__link-icon {

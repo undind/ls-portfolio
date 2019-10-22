@@ -1,6 +1,12 @@
-.main {
-  background: url('../images/content/MountainBaloon.jpg') center center / cover no-repeat;
-  background-color: #fff;
+.menu-container {
+  display: grid;
+  grid-template: 
+    "header" max-content
+    "content" 1fr
+    "scroll" max-content / 1fr;
+  /* grid-template-columns: 1fr;
+  grid-template-rows: max-content 1fr max-content; */
+  height: 100%;
 }
 
 .menu__header {
@@ -8,6 +14,7 @@
   justify-content: space-between;
   align-items: center;
   padding-top: 62px;
+  grid-area: header;
 }
 
 .header__logo {
@@ -18,6 +25,56 @@
 
 .header__menu {
   width: 46%;
+
+  @include desktop {
+    width: 65%;
+  }
+
+  @include tablets {
+    display: none;
+  }
+
+  &.active {
+    position: fixed;
+    width: 50%;
+    height: 100%;
+    right: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    z-index: 99;
+    font-size: 18px;
+    font-weight: 600;
+
+    @include phones {
+      width: 100%;
+    }
+
+    & .nav {
+      display: flex;
+      height: 30%;
+      margin-left: -100px;
+      margin-bottom: 60px;
+    }
+
+    & .nav__list {
+      flex-direction: column;
+      text-align: left;
+      justify-content: space-between;
+    }
+
+    & .header__menu-socials {
+      display: block;
+      margin-left: -100px;
+
+      & .social__list {
+        width: 200%;
+      }
+    }
+  }
 }
 
 .nav__list {
@@ -30,4 +87,8 @@
   &:hover {
     color: $links-color;
   }
+}
+
+.header__menu-socials {
+  display: none;
 }

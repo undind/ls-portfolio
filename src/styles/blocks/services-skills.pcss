@@ -1,10 +1,31 @@
+.skills__row {
+  display: grid;
+  justify-items: right;
+
+  @include tablets {
+    justify-items: center;
+  }
+}
+
 .skills__group {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  margin-left: auto;
   width: 58%;
   margin-bottom: 44px;
+
+  @include desktop {
+    width: 65%;
+  }
+
+  @include tablets {
+    width: 90%;
+    align-items: center;
+  }
+
+  @include phones {
+    width: 100%;
+  }
 }
 
 .skills__group-title {
@@ -13,6 +34,10 @@
   font-weight: 700;
   line-height: 1;
   margin-bottom: 33px;
+
+  @include tablets {
+    align-self: center;
+  }
 }
 
 .skills__group-items {
@@ -21,6 +46,14 @@
   justify-content: space-between;
   flex-wrap: wrap;
   margin-right: auto;
+
+  @include tablets {
+    margin-right: 0;
+  }
+
+  @include phones {
+    width: 100%;
+  }
 }
 
 .skill {

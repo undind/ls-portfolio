@@ -1,6 +1,19 @@
 .triangles {
   display: flex;
   margin-top: -120px;
+  position: relative;
+
+  @include desktop {
+    margin-top: -90px;
+  }
+
+  @include tablets {
+    margin-top: -55px;
+  }
+
+  @include phones {
+    margin-top: -30px;
+  }
 }
 
 .triangles__item {
@@ -8,6 +21,18 @@
   display: block;
   height: 120px;
   fill: #fff;
+
+  @include desktop {
+    height: 90px;
+  }
+
+  @include tablets {
+    height: 55px;
+  }
+
+  @include phones {
+    height: 30px;
+  }
 }
 
 .triangles-budda {
@@ -15,4 +40,16 @@
   top: 120px;
   left: 0;
   right: 0;
+
+  @include desktop {
+    top: 90px;
+  }
+
+  @include tablets {
+    top: 55px;
+  }
+
+  @include phones {
+    top: 30px;
+  }
 }
