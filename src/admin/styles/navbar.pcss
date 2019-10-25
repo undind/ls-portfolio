@@ -1,0 +1,36 @@
+.navbar-section {
+  background-color: #fff;
+}
+
+.navbar__list {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__item {
+  padding: 27px 30px;
+  color: $text-color;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all .3s;
+
+  &:hover {
+    color: $admin-color; 
+  }
+
+  &-active {
+    position: relative;
+    color: $admin-color;
+    font-weight: 600;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 3px;
+      background-color: $admin-color;
+    }
+  }
+}
