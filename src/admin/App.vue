@@ -2,6 +2,7 @@
   .app
     .login-page
       .login-page__form
+        login-form
     .inner-page
       .admin-section
         .container
@@ -22,9 +23,15 @@
 </template>
 
 <script>
-export default {
-  
-}
+  import LoginForm from './components/LoginForm.vue';
+  import Icon from './components/Icon.vue';
+
+  export default {
+    components: {
+      LoginForm,
+      Icon
+    }
+  }
 </script>
 
 <style lang="postcss">
