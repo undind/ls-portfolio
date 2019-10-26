@@ -1,159 +1,77 @@
-.feedback__form {
+  
+.feedback-form {
+  position: relative;
+  z-index: 1;
   width: 59%;
 
   @include desktop {
     width: 75%;
   }
 
-  @include desktop {
+  @include tablets {
     width: 100%;
   }
 }
 
-.form__elem {
+.feedback-form__title {
+  margin-bottom: 100px;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 48px;
+
+  @include desktop {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
   @include tablets {
-    display: flex;
-    flex-direction: column;
+    text-align: left;
   }
 }
 
-.form__row {
+.feedback-form__row {
   display: flex;
-  margin-bottom: 103px;
+  justify-content: space-between;
+  margin-bottom: 60px;
+
+  @include desktop {
+    margin-bottom: 30px;
+  }
 
   @include phones {
     flex-direction: column;
-  }
-
-  &:last-of-type {
-    margin-bottom: 57px;
-
-    @include phones {
-      margin-bottom: 0;
-    }
+    margin-bottom: 0;
   }
 }
 
-.form__block {
-  position: relative;
-  cursor: pointer;
-  flex: 1;
-  display: block;
-  margin-right: 60px;
-  &:last-child {
-    margin-right: 0;
-  }
-
-  &:first-child {
-    @include phones {
-      margin-right: 0;
-      margin-bottom: 60px;
-    }
-  }
-}
-
-.form__input {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  border: 0;
-  width: 100%;
-  font-family: inherit;
-  padding: 20px 40px;
-  font-size: 18px;
-  font-weight: 700;
-  border-bottom: 2px solid #464d62;
-  background: none;
-  border-radius: 0;
-  cursor: pointer;
-  transition: all .25s ease;
-  &:focus {
-    background: none;
-    outline: none;
-    & + .form__text {
-      transform: translateY(-50px);
-      & + .form__border {
-        transform: scaleX(1);
-        & + .form__svg {
-          & .form__svg-icon {
-           fill: $links-color;
-           opacity: 1;
-          }
-        }
-      }
-    }
-  }
-}
-
-.form__svg {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-}
-
-.form__svg-icon {
-  width: 30px;
-  height: 30px;
-  fill: $text-color;
-  opacity: 0.3;
-}
-
-.form__text {
-  position: absolute;
-  bottom: 20px;
-  left: 40px;
-  opacity: 0.3;
-  font-weight: 600;
-  transform-origin: 0 0;
-  transition: all .2s ease;
-}
-
-.form__border {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: $links-color;
-  transform: scaleX(0);
-  transform-origin: 0 0;
-  transition: all .25s ease;
-}
-
-.form__btn {
-  color: #ffffff;
-  font-size: 18px;
-  display: inline-block;
-  position: relative;
-  font-weight: 700;
-  text-transform: uppercase;
-  background-image: $primary-gradient;
-  border-radius: 40px 5px;
-  background-color: #ffffff;
-  padding: 31px 118px;
-  z-index: 100;
+.feedback-form__name,
+.feedback-form__mail {
+  flex-grow: 1;
 
   @include tablets {
-    align-self: center;
+    flex-direction: column;
+    margin-bottom: 40px;
+  }
+}
+
+.feedback-form__name {
+  margin-right: 50px;
+
+  @include phones {
+    margin-right: 0;
+  }
+}
+.feedback-form__button {
+  text-align: center;
+  margin-top: 60px;
+
+  @include desktop {
+    margin-top: 30px;
   }
 
-  &:before {
-    border-radius: inherit;
-    background-image: $reverse-gradient;
-    content: '';    
-    display: block;
-    height: 100%;
-    position: absolute;
-    top: 0; 
-    left: 0;
-    opacity: 0;
-    width: 100%;
-    z-index: -100;
-    transition: opacity 0.45s;
-  }
-
-  &:hover {
-    &::before {
-      opacity: 1;
-    }
+  @include phones {
+    position: relative;
+    z-index: -1;
   }
 }

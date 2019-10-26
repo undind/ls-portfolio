@@ -1,22 +1,21 @@
 <template lang="pug">
-  .basic-input(:class="`basic-input_${theme}`")
-    input.basic-input__control(
-      :type="type"
+  .basic-textarea(:class="`basic-textarea_${theme}`")
+    textarea.basic-textarea__control(
+      ref="textarea"
       :value="value"
       :required="required"
       :class="inputClass"
       v-on="listeners"
     )
-    .basic-input__icon(v-if="icon")
+    .basic-textarea__icon(v-if="icon")
       icon(:name="icon")
-    label.basic-input__label {{ label }}
+    label.basic-textarea__label {{ label }}
     transition(name="slide-up")
-      .basic-input__error(v-if="errorMessage") {{ errorMessage }}
+      .basic-textarea__error(v-if="errorMessage") {{ errorMessage }}
 </template>
 
 <script>
   import Icon from './Icon.vue';
-  
   export default {
     components: {
       Icon,
@@ -50,10 +49,6 @@
         type: String,
         default: 'dark',
       },
-      type: {
-        type: String,
-        default: 'text',
-      },
     },
     computed: {
       listeners() {
@@ -62,15 +57,17 @@
           input: (event) => {
             if (!this.disabled) {
               this.$emit('input', event.target.value);
+              this.$refs.textarea.style.height = 'auto';
+              this.$refs.textarea.style.height = `${this.$refs.textarea.scrollHeight}px`;
             }
           },
         };
       },
       inputClass() {
         return {
-          'basic-input__control_dirty': this.value.length,
-          'basic-input__control_disabled': this.disabled,
-          'basic-input__control_invalid': this.errorMessage,
+          'basic-textarea__control_dirty': this.value.length,
+          'basic-textarea__control_disabled': this.disabled,
+          'basic-textarea__control_invalid': this.errorMessage,
         };
       },
     },
@@ -80,37 +77,39 @@
 <style lang="postcss" scoped>
   @import '../../styles/mixins.pcss';
 
-  .basic-input {
+  .basic-textarea {
     position: relative;
+    line-height: 0;
     width: 100%;
-    
+
     &__control {
       padding-left: 45px;
       width: 100%;
       color: $text-color;
       font-size: 18px;
       font-weight: 700;
-      line-height: 56px;
-      border-radius: 0;
+      min-height: 56px;
+      height: auto;
+      line-height: 36px;
       background: none;
       border: none;
       border-bottom: 1px solid $text-color;
       outline: none;
       transition: border 0.2s ease;
+      resize: none;
+
       &:focus {
         border-bottom-color: $links-color;
       }
+
       &_invalid,
       &_invalid:focus {
         border-bottom-color: $danger-color;
       }
+
       @include desktop {
         font-size: 14px;
       }
-    }
-
-    &_light &__control {
-      color: $text-color;
     }
 
     &__icon {
@@ -119,11 +118,11 @@
       left: 0;
       width: 30px;
       height: 30px;
-      fill: rgba(70, 77, 98, 0.3);
+      fill: rgba(65, 76, 99, 0.3);
       transform: translateY(-50%);
       pointer-events: none;
     }
-
+    
     &_light &__icon {
       fill: rgba(70, 77, 98, 0.3);
     }
@@ -140,10 +139,10 @@
 
     &__label {
       position: absolute;
-      top: 50%;
+      top: 28px;
       left: 45px;
       bottom: auto;
-      color: rgba(70, 77, 98, 0.3);
+      color: rgba(65, 76, 99, 0.3);
       font-size: 16px;
       font-weight: 600;
       line-height: 30px;
@@ -166,17 +165,15 @@
 
     &__error {
       position: absolute;
-      z-index: 1;
       top: 100%;
       left: 45px;
       padding: 0 20px;
-      color: white;
+      color: #fff;
       background-color: $danger-color;
       font-size: 14px;
       font-weight: 400;
       line-height: 48px;
-      z-index: 100;
-      
+
       &::before,
       &::after {
         content: '';
@@ -193,7 +190,7 @@
         border-left-color: transparent;
         transform: translateX(-100%);
       }
-      
+
       &::after {
         border-top-color: transparent;
         border-right-color: transparent;
