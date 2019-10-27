@@ -119,6 +119,24 @@
                 .my-works__content-buttons
                   button.app-button__reset Отмена
                   button.app-button Сохранить
+          .my-works__new
+            .works-new__add
+              button.works-new__button
+                icon.works-new__button-icon(name="Plus")
+              .works-new__desc Добавить работу
+            .works-new__edit
+              .works-new__img
+                img(src="../images/admin/admin-works.png")
+              .works-new__body
+                label.works-new__label
+                  .works-new__text Новая работа
+                  input.app-input.works-new__input(placeholder="Описание работы")
+                a.works-new__link(href="http://loftschool.ru") http://loftschool.ru
+                .works-new__controls
+                  button.works-new__control Править
+                    icon.works-new__icon.works-icon__accept(name="Tick")
+                  button.works-new__control Удалить
+                    icon.works-new__icon.works-icon__delete(name="Cross")
 </template>
 
 <script>
@@ -135,60 +153,4 @@
 
 <style lang="postcss">
   @import "./styles/main.pcss";
-
-  .app-input {
-    border: none;
-    background: none;
-    border-bottom: 1px solid transparent;
-    outline: none;
-    padding-bottom: 5px;
-    color: $text-color;
-    width: 100%;
-
-    &:focus {
-      border-bottom-color: $links-color;
-    }
-
-    &::placeholder {
-      font-size: 18px;
-      font-weight: 600;
-      opacity: .5;
-    }
-
-    &:disabled {
-      opacity: 0.8;
-    }
-  }
-
-  .app-textarea {
-    width: 100%;
-    resize: none;
-    border: 1px solid $text-color;
-    min-height: 150px;
-    outline: none;
-    padding: 20px;
-    color: $text-color;
-    font-weight: 600;
-
-    &:focus {
-      border-color: $links-color;
-    } 
-  }
-
-  .app-button__reset {
-    border: 0;
-    background: none;
-    color: $admin-color;
-    font-weight: 600;
-    margin-right: 60px;
-  }
-
-  .app-button {
-    color: #fff;
-    font-weight: 700;
-    text-transform: uppercase;
-    border-radius: 25px;
-    padding: 20px 45px;
-    background-image: linear-gradient(to right, #006aed 0%, #3f35cb 100%);
-  }
 </style>
