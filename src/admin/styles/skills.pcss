@@ -8,6 +8,10 @@
   &:focus {
     border-bottom-color: $links-color !important;
   }
+
+  @include phones {
+    min-width: 223px;
+  }
 }
 
 .skill-group {
@@ -21,6 +25,10 @@
   background-color: #fff;
   padding: 0;
   margin-right: 20px;
+
+  @include phones {
+    margin-right: 10px;
+  }
 
   &:last-child {
     margin-right: 0;
@@ -98,10 +106,19 @@
   justify-items: end;
   align-items: end;
   grid-gap: 30px;
+
+  @include phones {
+    grid-gap: 15px;
+    justify-items: start;
+  }
 }
 
 .new-skill__name {
   width: 70%;
+
+  @include phones {
+    width: 100%;
+  }
 }
 
 .new-skill__input {

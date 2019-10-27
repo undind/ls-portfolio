@@ -156,7 +156,7 @@
                     .my-reviews__content-title Титул автора
                     input.app-input.my-reviews__input
                 .my-works__row
-                  label.my-reviews__block
+                  label.my-reviews__block.my-reviews__block-textarea
                     .my-reviews__content-title Отзыв
                     textarea.app-textarea
                 .my-reviews__content-buttons

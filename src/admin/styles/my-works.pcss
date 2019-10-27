@@ -5,7 +5,11 @@
 .my-works__card {
   box-shadow: $admin-shadow;
   background-color: #ffffff;
-  padding: 20px;
+  padding: 30px;
+
+  @include phones {
+    padding: 10px;
+  }
 }
 
 .my-works__header {
@@ -24,6 +28,12 @@
   grid-template-columns: 1fr 1fr;
   padding: 50px 8px 0;
   grid-gap: 20px;
+
+  @include tablets {
+    grid-template-columns: 1fr;
+    justify-content: center;
+    padding: 30px 100px;
+  }
 }
 
 .my-works__edit {
@@ -68,4 +78,8 @@
   margin-top: 60px;
   display: flex;
   justify-content: flex-end;
+
+  @include tablets {
+    justify-content: center;
+  }
 }

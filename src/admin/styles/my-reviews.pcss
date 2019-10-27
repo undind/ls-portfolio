@@ -5,7 +5,11 @@
 .my-reviews__card {
   box-shadow: 4px 3px 20px rgba(0, 0, 0, 0.07);
   background-color: #ffffff;
-  padding: 20px;
+  padding: 30px;
+
+  @include phones {
+    padding: 10px;
+  }
 }
 
 .my-reviews__header {
@@ -24,6 +28,14 @@
   grid-template-columns: max-content 60%;
   padding: 50px 8px 0;
   grid-gap: 30px;
+
+  @include tablets {
+    grid-template-columns: max-content 1fr;
+  }
+
+  @include phones {
+    grid-template-columns: 1fr;
+  }
 }
 
 .my-reviews__edit {
@@ -60,6 +72,10 @@
 .my-reviews__row {
   margin-bottom: 30px;
   display: flex;
+
+  @include tablets {
+    flex-direction: column;
+  }
 }
 
 .my-reviews__block {
@@ -67,8 +83,24 @@
   display: block;
   margin-right: 30px;
 
+  @include tablets {
+    margin-right: 0;
+    margin-bottom: 30px;
+    width: 70%;
+  }
+
+  @include phones {
+    width: 100%;
+  }
+
   &:last-child {
     margin-right: 0;
+  }
+}
+
+.my-reviews__block-textarea {
+  @include tablets {
+    width: 100%;
   }
 }
 
@@ -92,4 +124,9 @@
   margin-top: 60px;
   display: flex;
   justify-content: flex-end;
+
+  @include phones {
+    justify-content: center;
+    margin-top: 30px;
+  }
 }
