@@ -29,8 +29,8 @@ new Vue({
     },
     message: (value) => {
       return Validator.value(value)
-        .required()
-        .minLength(5);
+        .required('Введите текст сообщения')
+        .minLength(5, 'Минимум 5 символов');
     },
   },
   data() {
@@ -46,7 +46,7 @@ new Vue({
       return {
         name: this.validation.hasError('name') ? 'Введите имя' : '',
         email: this.validation.hasError('email') ? 'Введите корректный e-mail' : '',
-        message: this.validation.hasError('message') ? 'Введите текст сообщения' : '',
+        // message: this.validation.hasError('message') ? 'Введите текст сообщения' : '',
       };
     },
   },
