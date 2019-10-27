@@ -90,9 +90,35 @@
                     .skills__percent-measure %
                   button.new-skill__button
                     icon.new-skill__icon(name="Plus")
-
-
-
+      section.my-works
+        .container
+          .my-works__card
+            .my-works__header
+              .my-works__title Добавление работы
+            .my-works__body
+              .my-works__edit
+                .my-works__edit-text Перетащите или загрузите для загрузки изображения
+                button.app-button.my-works__edit-btn Загрузить
+              .my-works__content
+                .my-works__row
+                  label.my-works__block
+                    .my-works__content-title Название
+                    input.app-input.my-works__input
+                .my-works__row
+                  label.my-works__block
+                    .my-works__content-title Ссылка
+                    input.app-input.my-works__input
+                .my-works__row
+                  label.my-works__block
+                    .my-works__content-title Описание
+                    textarea.app-textarea
+                .my-works__row
+                  label.my-works__block
+                    .my-works__content-title Добавление тэга
+                    input.app-input.my-works__input
+                .my-works__content-buttons
+                  button.app-button__reset Отмена
+                  button.app-button Сохранить
 </template>
 
 <script>
@@ -132,5 +158,37 @@
     &:disabled {
       opacity: 0.8;
     }
+  }
+
+  .app-textarea {
+    width: 100%;
+    resize: none;
+    border: 1px solid $text-color;
+    min-height: 150px;
+    outline: none;
+    padding: 20px;
+    color: $text-color;
+    font-weight: 600;
+
+    &:focus {
+      border-color: $links-color;
+    } 
+  }
+
+  .app-button__reset {
+    border: 0;
+    background: none;
+    color: $admin-color;
+    font-weight: 600;
+    margin-right: 60px;
+  }
+
+  .app-button {
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 25px;
+    padding: 20px 45px;
+    background-image: linear-gradient(to right, #006aed 0%, #3f35cb 100%);
   }
 </style>
