@@ -1,0 +1,138 @@
+.my-reviews {
+  padding-bottom: 40px;
+}
+
+.my-reviews__card {
+  box-shadow: 4px 3px 20px rgba(0, 0, 0, 0.07);
+  background-color: #ffffff;
+  padding: 30px;
+
+  @include phones {
+    padding: 0;
+  }
+}
+
+.my-reviews__header {
+  border-bottom: 1px solid rgba(#1f232d, 0.15);
+  padding-bottom: 20px;
+  padding-left: 15px;
+}
+
+.my-reviews__title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.my-reviews__body {
+  display: grid;
+  grid-template-columns: max-content 60%;
+  padding: 50px 8px 0;
+  grid-gap: 30px;
+
+  @include tablets {
+    grid-template-columns: max-content 1fr;
+    padding: 20px 15px;
+  }
+
+  @include phones {
+    grid-template-columns: 1fr;
+  }
+}
+
+.my-reviews__edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  align-self: start;
+}
+
+.my-reviews__edit-btn {
+  width: 200px;
+  height: 200px;
+  background-color: #dee4ed;
+  border-radius: 50%;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+
+.my-reviews__edit-icon {
+  width: 105px;
+  height: 113px;
+  fill: #fff;
+}
+
+.my-reviews__edit-link  {
+  background: none;
+  color: $admin-color;
+  font-weight: 600;
+  margin-top: 30px;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.my-reviews__row {
+  margin-bottom: 30px;
+  display: flex;
+
+  @include tablets {
+    flex-direction: column;
+  }
+}
+
+.my-reviews__block {
+  flex: 1;
+  display: block;
+  margin-right: 30px;
+
+  @include tablets {
+    margin-right: 0;
+    margin-bottom: 30px;
+    width: 70%;
+  }
+
+  @include phones {
+    width: 100%;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.my-reviews__block-textarea {
+  @include tablets {
+    width: 100%;
+  }
+}
+
+.my-reviews__content-title {
+  opacity: 0.5;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.my-reviews__input {
+  border-bottom: 1px solid #000;
+  font-weight: 600;
+  padding-bottom: 20px;
+
+  &:focus {
+    border-bottom-color: $links-color;
+  }
+}
+
+.my-reviews__content-buttons {
+  margin-top: 60px;
+  display: flex;
+  justify-content: flex-end;
+
+  @include phones {
+    justify-content: center;
+    margin-top: 30px;
+  }
+}

@@ -1,0 +1,30 @@
+.app-button__reset {
+  border: 0;
+  background: none;
+  color: $admin-color;
+  font-weight: 600;
+  margin-right: 60px;
+  transition: opacity 0.3s;
+
+  @include phones {
+    margin-right: 10px;
+  }
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.app-button {
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 25px;
+  padding: 20px 45px;
+  background-image: linear-gradient(to right, #006aed 0%, #3f35cb 100%);
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}

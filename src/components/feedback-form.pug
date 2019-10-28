@@ -1,23 +1,39 @@
-.feedback__form
-  form.form__elem
-    .form__row
-      label.form__block.form__block-name
-        input(type="name" required).form__input
-        span.form__text Введите ваше Имя
-        span.form__border
-        span.form__svg
-          +icon('Avatar', 'form__svg-icon')
-      label.form__block.form__block-email
-        input(type="email" required).form__input
-        span.form__text Введите ваш email
-        span.form__border
-        span.form__svg
-          +icon('Envelope', 'form__svg-icon')
-    .form__row
-      label.form__block
-        input(type="text" required).form__input
-        span.form__text Сообщение к письму
-        span.form__border
-        span.form__svg
-          +icon('Chat', 'form__svg-icon')
-    button.form__btn(type="submit") Отправить
+script(type="text/x-template")#feedback-form
+  form.feedback-form(@submit.prevent="onFormSumbit")
+    .feedback-form__title Связаться со мной
+    .feedback-form__row
+      .feedback-form__name
+        basic-input(
+          v-model="name"
+          :required="false"
+          :error-message="errors.name"
+          label="Введите ваше имя"
+          type="text"
+          name="name"
+          icon="Avatar"
+        )
+      .feedback-form__mail
+        basic-input(
+          v-model="email"
+          :required="false"
+          :error-message="errors.email"
+          label="Введите ваш email"
+          type="email"
+          name="mail"
+          icon="Envelope"
+        )
+    .feedback-form__message
+      basic-textarea(
+        v-model="message"
+        :required="false"
+        :error-message="validation.firstError('message')"
+        label="Сообщение к письму"
+        name="message"
+        icon="Chat"
+      )
+    .feedback-form__button
+      basic-button(type='submit') Отправить
+    alert-modal(
+      v-if="isShowAlert"
+      @close="hideModal"
+    ) Письмо отправлено
