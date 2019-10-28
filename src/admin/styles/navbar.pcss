@@ -5,6 +5,14 @@
 .navbar__list {
   display: flex;
   align-items: center;
+
+  @include tablets {
+    padding: 0 45px;
+  }
+
+  @include phones {
+    padding: 0 0 0 15px;
+  }
 }
 
 .navbar__item {
@@ -13,6 +21,10 @@
   text-decoration: none;
   white-space: nowrap;
   transition: all .3s;
+
+  @include phones {
+    padding: 27px 25px;
+  }
 
   &:hover {
     color: $admin-color; 

@@ -8,15 +8,29 @@
   grid-template-rows: max-content 1fr max-content;
 
   @include phones {
-    padding: 10px;
+    padding: 20px 0;
   }
 }
 
 .card__header {
   padding: 0 8px 14px 8px;
   border-bottom: 1px solid rgba(#1f232d, 0.15);
+
+  @include phones {
+    padding: 0 15px 20px 15px;
+  }
 }
 
 .card__body {
   padding: 30px 8px;
+
+  @include phones {
+    padding: 30px 15px;
+  }
+}
+
+.card__footer {
+  @include phones {
+    padding: 0 15px;
+  }
 }

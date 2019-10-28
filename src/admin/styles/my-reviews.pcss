@@ -8,14 +8,14 @@
   padding: 30px;
 
   @include phones {
-    padding: 10px;
+    padding: 0;
   }
 }
 
 .my-reviews__header {
   border-bottom: 1px solid rgba(#1f232d, 0.15);
   padding-bottom: 20px;
-  padding-left: 10px;
+  padding-left: 15px;
 }
 
 .my-reviews__title {
@@ -31,6 +31,7 @@
 
   @include tablets {
     grid-template-columns: max-content 1fr;
+    padding: 20px 15px;
   }
 
   @include phones {
@@ -51,13 +52,13 @@
   height: 200px;
   background-color: #dee4ed;
   border-radius: 50%;
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 }
 
 .my-reviews__edit-icon {
-  width: 95px;
+  width: 105px;
   height: 113px;
   fill: #fff;
 }
@@ -67,6 +68,11 @@
   color: $admin-color;
   font-weight: 600;
   margin-top: 30px;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.85;
+  }
 }
 
 .my-reviews__row {

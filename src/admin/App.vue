@@ -5,7 +5,7 @@
         login-form
     .inner-page
       section.admin-section
-        .container
+        .admin-container
           header.admin-header
             .header__desc
               a.header__avatar
@@ -15,13 +15,13 @@
             .admin-logout
               a.logout__link Выйти
       section.navbar-section
-        .container
+        .admin-container
           .navbar__list
             - var navbars = ['Обо мне', 'Работы', 'Отзывы']
               each item, i in navbars 
                 a.navbar__item(class=`${i === 0 ? 'navbar__item-active' : ''}`) #{item}
       section.about-section
-        .container
+        .admin-container
           .about__header
             h1.about__title Блок "Обо мне"
           .about__content
@@ -91,7 +91,7 @@
                   button.new-skill__button
                     icon.new-skill__icon(name="Plus")
       section.my-works
-        .container
+        .admin-container
           .my-works__card
             .my-works__header
               .my-works__title Добавление работы
@@ -133,12 +133,14 @@
                   input.app-input.works-new__input(placeholder="Описание работы")
                 a.works-new__link(href="http://loftschool.ru") http://loftschool.ru
                 .works-new__controls
-                  button.works-new__control Править
+                  button.works-new__control
+                    .works-new__control-text Править
                     icon.works-new__icon.works-icon__accept(name="Pencil")
-                  button.works-new__control Удалить
+                  button.works-new__control
+                    .works-new__control-text Удалить
                     icon.works-new__icon.works-icon__delete(name="Cross")
       section.my-reviews
-        .container
+        .admin-container
           .my-reviews__card
             .my-reviews__header
               .my-reviews__title Добавить отзыв
@@ -178,9 +180,11 @@
                 label.my-reviews__label
                   textarea.app-textarea.my-reviews__textarea(placeholder="Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах")
                 .my-reviews__controls
-                  button.my-reviews__control Править
+                  button.my-reviews__control
+                    .my-reviews__control-text Править
                     icon.my-reviews__icon.reviews-icon__accept(name="Pencil")
-                  button.my-reviews__control Удалить
+                  button.my-reviews__control
+                    .my-reviews__control-text Удалить
                     icon.my-reviews__icon.reviews-icon__delete(name="Cross")
 
 </template>
