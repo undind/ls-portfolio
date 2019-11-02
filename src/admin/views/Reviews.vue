@@ -2,7 +2,7 @@
   section.my-reviews
     .admin-container
       .reviews__header
-        .reviews__title Добавить отзыв
+        .reviews__title {{$route.meta.title}}
       .my-reviews__card
         .my-reviews__header
           .my-reviews__title Добавить отзыв

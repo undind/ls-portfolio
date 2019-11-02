@@ -2,7 +2,7 @@
   section.my-works
     .admin-container
       .works__header
-        .works__title Добавить отзыв
+        .works__title {{$route.meta.title}}
       .my-works__card
         .my-works__header
           .my-works__title Добавление работы

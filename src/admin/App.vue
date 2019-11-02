@@ -4,15 +4,9 @@
 </template>
 
 <script>
-  import LoginForm from './components/LoginForm.vue';
-  import Icon from './components/Icon.vue';
-
-  export default {
-    components: {
-      LoginForm,
-      Icon
-    }
-  }
+export default {
+  
+}
 </script>
 
 <style lang="postcss">

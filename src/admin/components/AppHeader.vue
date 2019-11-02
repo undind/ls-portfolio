@@ -1,3 +1,19 @@
+<template lang="pug">
+  section.admin-section
+    .admin-container
+      header.admin-header
+        .header__desc
+          a.header__avatar
+            img.header__avatar-img(src="../../images/greeting/me.png" alt="")
+          .header__username Сергей Антонов
+          .header__panelname Панель администратора
+        .admin-logout
+          a.logout__link Выйти
+</template>
+
+<style lang="postcss" scoped>
+@import "../../styles/mixins.pcss";
+
 .admin-section {
   background-image: linear-gradient(to right, #3e3e59 0%, #454573 100%);
 }
@@ -50,3 +66,4 @@
   color: #ffffff;
   font-size: 16px;
 }
+</style>

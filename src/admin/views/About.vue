@@ -2,7 +2,7 @@
   section.about-section
     .admin-container
       .about__header
-        h1.about__title Блок "Обо мне"
+        h1.about__title {{$route.meta.title}}
       .about__content
         .card
           .card__header.skill-group
