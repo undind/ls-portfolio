@@ -56,7 +56,7 @@
       'user.password': (value) => {
         return Validator.value(value)
           .required('Введите пароль')
-          .minLength(4, 'Минимум 4 символа');
+          .minLength(3, 'Минимум 3 символа');
       },
     },
     methods: {
@@ -70,25 +70,16 @@
       async login() {
         try {
           const response = await $axios.post('/login', this.user);
-          console.log(response);
-          
+          const token = response.data.token;
+
+          localStorage.setItem("token", token);
+          $axios.defaults.headers["Authorization"] = `Bearer ${token}`;
+
+          this.$router.replace("/");
         } catch (error) {
-          
+          alert('FALSE');
+          this.user.password = '';
         }
-        // this.isLoading = true;
-        // axios
-        //   .post('https://webdev-api.loftschool.com/login', {
-        //     name: this.user.name,
-        //     password: this.user.password
-        //   })
-        //   .then((response) => {
-        //     alert("ВСЕ ОК!");  
-        //   })
-        //   .catch((e) => {
-        //     alert(e.response.data.error);
-        //   });
-        // this.password = '';
-        // this.isLoading = false;
       },
       exitFromAdmin() {
         location.href = 'https://undind.github.io/ls-portfolio/';
