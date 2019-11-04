@@ -20,8 +20,6 @@ router.beforeEach(async (to, from, next) => {
   if (isPublicRoute === false && isUserLogged === false) {
     const token = localStorage.getItem("token");
     guard.defaults.headers["Authorization"] = `Bearer ${token}`;
-    console.log(guard);
-    
 
     try {
       const response = await guard.get('/user');
