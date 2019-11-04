@@ -31,15 +31,15 @@ export default {
   width: 100%;
   height: 100%;
   padding: 30px;
-  background-image: $primary-gradient;
+  background-image: $admin-gradient;
   color: white;
   font-size: 18px;
   font-weight: 700;
   line-height: 30px;
-  transition: background-image 0.2s ease;
+  transition: opacity 0.2s ease;
 
   &:hover {
-    background-image: $reverse-gradient;
+    opacity: 0.95;
   }
 }
 

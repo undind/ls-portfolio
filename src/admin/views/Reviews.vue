@@ -3,9 +3,11 @@
     .admin-container
       .reviews__header
         .reviews__title {{$route.meta.title}}
-      .my-reviews__card
+      .my-reviews__card(v-if="isShowForm")
         reviews-form(
           :current-review="currentReview"
+          @reset="cancelReviewChanges"
+          @create="createReview"
         )
       .my-reviews__new
         gradient-button(
@@ -20,6 +22,7 @@
           :key="item.id"
           :review="item"
           :is-active="item === currentReview"
+          @edit="editReview(item)"
         )
 </template>
 
@@ -95,6 +98,7 @@ export default {
   box-shadow: 4px 3px 20px rgba(0, 0, 0, 0.07);
   background-color: #ffffff;
   padding: 30px;
+  margin-bottom: 50px;
 
   @include phones {
     padding: 0;
@@ -102,7 +106,6 @@ export default {
 }
 
 .my-reviews__new {
-  margin-top: 50px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 30px;

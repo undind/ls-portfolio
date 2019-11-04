@@ -1,5 +1,5 @@
 <template lang="pug">
-  .my-reviews__fix(:class="{ 'my-reviews__active': isActive }")
+  .my-reviews__item(:class="{ 'my-reviews__active': isActive }")
     .my-reviews__head
       .my-reviews__img
         img().my-reviews__avatar
@@ -9,7 +9,9 @@
     .my-reviews__new-body
       .my-reviews__text {{ review.text }}
       .my-reviews__controls
-        button.my-reviews__control
+        button(
+          @click="$emit('edit')"
+        ).my-reviews__control
           .my-reviews__control-text Править
           icon.my-reviews__icon.reviews-icon__accept(name="Pencil")
         button.my-reviews__control
@@ -48,13 +50,14 @@ export default {
 <style lang="postcss" scoped>
 @import "../../styles/mixins.pcss";
 
-.my-reviews__fix {
+.my-reviews__item {
   box-shadow: $admin-shadow;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
   padding: 30px;
   height: 100%;
+  position: relative;
 }
 
 .my-reviews__active {

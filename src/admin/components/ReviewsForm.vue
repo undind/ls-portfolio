@@ -1,7 +1,7 @@
 <template lang="pug">
   .new-reviews
     .my-reviews__header
-      .my-reviews__title Новый отзыв
+      .my-reviews__title {{ title }}
     form.my-reviews__form(@submit.prevent="onSubmit")
       .my-reviews__edit
         avatar-upload(
@@ -20,7 +20,7 @@
           ).my-reviews__block
           simple-input(
             label="Титул автора"
-            v-model="reviewData.occ"
+            v-model="reviewData.position"
             :error-message="validation.firstError('reviewData.position')"
           ).my-reviews__block
           //- label.my-reviews__block
@@ -39,7 +39,9 @@
           //-   .my-reviews__content-title Отзыв
           //-   textarea.app-textarea
         .my-reviews__content-buttons
-          button().app-button__reset Отмена
+          button(
+            @click.prevent="$emit('reset')"
+          ).app-button__reset Отмена
           button(
             type="submit"
           ).app-button Сохранить
@@ -50,7 +52,7 @@ import SimpleVueValidation, { Validator } from 'simple-vue-validator';
 
 const emptyReviewData = {
   author: '',
-  occ: '',
+  position: '',
   text: '',
   photo: null,
 };
@@ -94,9 +96,14 @@ export default {
       return Validator.value(value).required('Введите текст отзыва');
     },
   },
+  computed: {
+    title() {
+      return this.currentReview ? "Редактирование отзыва" : "Новый отзыв";
+    },
+  },
   methods: {
     updateReviewData() {
-      this.reviewData = this.currentReview ? { ...this.currentReview } : { ...emptyReviewData };
+      this.reviewData = this.currentReview ? { ...this.currentReview } : { ...emptyReviewData } ;
     },
     onSubmit() {
       this.$validate().then((success) => {
