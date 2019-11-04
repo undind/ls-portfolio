@@ -4,36 +4,67 @@
       .reviews__header
         .reviews__title {{$route.meta.title}}
       .my-reviews__card
-        reviews-form
+        reviews-form(
+          :current-review="currentReview"
+        )
       .my-reviews__new
-        .my-reviews__add
-          button.my-reviews__button
-            icon.my-reviews__button-icon(name="Plus")
-          .my-reviews__desc Добавить отзыв
-        .my-reviews__fix
-          .my-reviews__head
-            .my-reviews__img
-              img(src="../../images/reviews/1.png")
-            .my-reviews__about
-              .my-reviews__author Имя Фамилия
-              .my-reviews__position Программист
-          .my-reviews__new-body
-            label.my-reviews__label
-              textarea.app-textarea.my-reviews__textarea(placeholder="Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах")
-            .my-reviews__controls
-              button.my-reviews__control
-                .my-reviews__control-text Править
-                icon.my-reviews__icon.reviews-icon__accept(name="Pencil")
-              button.my-reviews__control
-                .my-reviews__control-text Удалить
-                icon.my-reviews__icon.reviews-icon__delete(name="Cross")
+        gradient-button(
+          :is-disabled="isShowForm && !currentReview"
+          @click="addReview"
+        ) Добавить #[br] отзыв
+          //- button.my-reviews__button
+          //-   icon.my-reviews__button-icon(name="Plus")
+          //- .my-reviews__desc Добавить отзыв
+        review-item(
+          v-for="item in reviews"
+          :key="item.id"
+          :review="item"
+          :is-active="item === currentReview"
+        )
 </template>
 
 <script>
+import reviews from "../../data/reviews.json";
+
 export default {
-   components: {
+  components: {
     ReviewsForm: () => import("components/ReviewsForm.vue"),
+    ReviewItem: () => import("components/ReviewItem.vue"),
+    GradientButton: () => import("components/GradientButton.vue"),
     Icon: () => import("components/Icon.vue")
+  },
+  data() {
+    return {
+      reviews: [],
+      currentReview: null,
+      isShowForm: false
+    };
+  },
+  methods: {
+    showForm() {
+      this.isShowForm = true;
+    },
+    hideForm() {
+      this.isShowForm = false;
+    },
+    addReview() {
+      this.currentReview = null;
+      this.showForm();
+    },
+    cancelReviewChanges() {
+      this.currentReview = null;
+      this.hideForm();
+    },
+    editReview(review) {
+      this.currentReview = review;
+      this.showForm();
+    },
+    createReview(review) {
+      console.log(review);
+    }
+  },
+  created() {
+    this.reviews = reviews;
   }
 }
 </script>
@@ -70,107 +101,18 @@ export default {
   }
 }
 
-/* .my-reviews__header {
-  border-bottom: 1px solid rgba(#1f232d, 0.15);
-  padding-bottom: 20px;
-  padding-left: 15px;
-}
-
-.my-reviews__title {
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.my-reviews__form {
+.my-reviews__new {
+  margin-top: 50px;
   display: grid;
-  grid-template-columns: max-content 60%;
-  padding: 50px 8px 0;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 30px;
 
-  @include tablets {
-    grid-template-columns: max-content 1fr;
-    padding: 20px 15px;
+  @include desktop {
+    grid-template-columns: 1fr 1fr;
   }
 
-  @include phones {
+  @include tablets {
     grid-template-columns: 1fr;
   }
 }
-
-.my-reviews__edit {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  align-self: start;
-}
-
-.my-reviews__edit-icon {
-  width: 105px;
-  height: 113px;
-  fill: #fff;
-}
-
-.my-reviews__edit-link  {
-  background: none;
-  color: $admin-color;
-  font-weight: 600;
-  margin-top: 30px;
-  transition: opacity 0.3s;
-
-  &:hover {
-    opacity: 0.85;
-  }
-}
-
-.my-reviews__row {
-  margin-bottom: 30px;
-  display: flex;
-
-  @include tablets {
-    flex-direction: column;
-  }
-}
-
-.my-reviews__block {
-  flex: 1;
-  display: block;
-  margin-right: 30px;
-
-  @include tablets {
-    margin-right: 0;
-    margin-bottom: 30px;
-    width: 70%;
-  }
-
-  @include phones {
-    width: 100%;
-  }
-
-  &:last-child {
-    margin-right: 0;
-  }
-}
-
-.my-reviews__block-textarea {
-  @include tablets {
-    width: 100%;
-  }
-} */
-
-/* .my-reviews__content-title {
-  opacity: 0.5;
-  font-weight: 600;
-  margin-bottom: 20px;
-}
-
-.my-reviews__input {
-  border-bottom: 1px solid #000;
-  font-weight: 600;
-  padding-bottom: 20px;
-
-  &:focus {
-    border-bottom-color: $links-color;
-  }
-} */
 </style>

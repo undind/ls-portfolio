@@ -21,7 +21,7 @@
           simple-input(
             label="Титул автора"
             v-model="reviewData.occ"
-            :error-message="validation.firstError('reviewData.occ')"
+            :error-message="validation.firstError('reviewData.position')"
           ).my-reviews__block
           //- label.my-reviews__block
           //-   .my-reviews__content-title Имя автора
@@ -68,6 +68,12 @@ export default {
       default: null,
     }
   },
+  watch: {
+    currentReview() {
+      this.updateReviewData();
+      this.validation.reset();
+    },
+  },
   mixins: [SimpleVueValidation.mixin],
   data() {
     return {
@@ -81,7 +87,7 @@ export default {
     'reviewData.author': (value) => {
       return Validator.value(value).required('Введите автора');
     },
-    'reviewData.occ': (value) => {
+    'reviewData.position': (value) => {
       return Validator.value(value).required('Введите титул');
     },
     'reviewData.text': (value) => {
