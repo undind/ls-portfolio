@@ -3,13 +3,29 @@
     .admin-container
       header.admin-header
         .header__desc
-          a.header__avatar
+          .header__avatar
             img.header__avatar-img(src="../../images/greeting/me.png" alt="")
           .header__username Сергей Антонов
           .header__panelname Панель администратора
         .admin-logout
-          a.logout__link Выйти
+          a(
+            @click="exitLink"
+          ).logout__link Выйти
 </template>
+
+<script>
+import { mapActions } from "vuex";
+
+export default {
+  methods: {
+    ...mapActions('user', ['logOut']),
+    exitLink() {
+      this.logOut();
+      this.$router.replace("/login");
+    }
+  },
+}
+</script>
 
 <style lang="postcss" scoped>
 @import "../../styles/mixins.pcss";
@@ -65,5 +81,9 @@
   opacity: 0.7;
   color: #ffffff;
   font-size: 16px;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 </style>

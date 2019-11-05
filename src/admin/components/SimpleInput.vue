@@ -108,6 +108,7 @@ export default {
   font-size: 16px;
   font-weight: inherit;
   line-height: 42px;
+  font-weight: 600;
   background: none;
   border: none;
   outline: transparent;

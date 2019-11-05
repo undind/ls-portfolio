@@ -7,7 +7,8 @@
         reviews-form(
           :current-review="currentReview"
           @reset="cancelReviewChanges"
-          @create="createReview"
+          @create="createNewReview"
+          @update="updateCurReview"
         )
       .my-reviews__new
         gradient-button(
@@ -23,11 +24,12 @@
           :review="item"
           :is-active="item === currentReview"
           @edit="editReview(item)"
+          @delete="deleteCurReview(item.id)"
         )
 </template>
 
 <script>
-import reviews from "../../data/reviews.json";
+import { mapState, mapActions } from 'vuex';
 
 export default {
   components: {
@@ -38,12 +40,41 @@ export default {
   },
   data() {
     return {
-      reviews: [],
       currentReview: null,
       isShowForm: false
     };
   },
+  computed: {
+    ...mapState('reviews', { reviews: state => state.reviews })
+  },
   methods: {
+    ...mapActions('reviews', ['createReview', 'fetchReviews', 'deleteReview', 'updateReview']),
+    async createNewReview(data) {
+      try {
+        await this.createReview(data);
+      } catch (error) {
+        console.log('Отзыв не был создан');
+      }
+
+      this.hideForm();
+    },
+    async updateCurReview(data) {
+      try {
+        await this.updateReview(data);
+        console.log(data);
+      } catch (error) {
+        console.log('Отзыв не был обновлен');
+      }
+
+      this.hideForm();
+    },
+    async deleteCurReview(id) {
+      try {
+        await this.deleteReview(id);
+      } catch (error) {
+        console.log('Отзыв не был удален');
+      }
+    },
     showForm() {
       this.isShowForm = true;
     },
@@ -62,12 +93,13 @@ export default {
       this.currentReview = review;
       this.showForm();
     },
-    createReview(review) {
-      console.log(review);
-    }
   },
-  created() {
-    this.reviews = reviews;
+  async created() {
+    try {
+      await this.fetchReviews();
+    } catch (error) {
+      console.log('Произошла ошибка при загрузке отзывов');
+    }
   }
 }
 </script>

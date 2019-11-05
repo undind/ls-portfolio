@@ -2,10 +2,10 @@
   .my-reviews__item(:class="{ 'my-reviews__active': isActive }")
     .my-reviews__head
       .my-reviews__img
-        img().my-reviews__avatar
+        img(:src="imageSrc").my-reviews__avatar
       .my-reviews__about
         .my-reviews__author {{ review.author }}
-        .my-reviews__position {{ review.position }}
+        .my-reviews__position {{ review.occ }}
     .my-reviews__new-body
       .my-reviews__text {{ review.text }}
       .my-reviews__controls
@@ -14,7 +14,9 @@
         ).my-reviews__control
           .my-reviews__control-text Править
           icon.my-reviews__icon.reviews-icon__accept(name="Pencil")
-        button.my-reviews__control
+        button(
+          @click="$emit('delete')"
+        ).my-reviews__control
           .my-reviews__control-text Удалить
           icon.my-reviews__icon.reviews-icon__delete(name="Cross")
 </template>
@@ -39,11 +41,11 @@ export default {
   data() {
     return {};
   },
-  // computed: {
-  //   imageSrc() {
-  //     return getAbsoluteImgPath(this.review.photo);
-  //   },
-  // },
+  computed: {
+    imageSrc() {
+      return getAbsoluteImgPath(this.review.photo);
+    },
+  },
 }
 </script>
 
@@ -109,6 +111,7 @@ export default {
 
 .my-reviews__position {
   opacity: 0.5;
+  font-weight: 600;
 }
 
 .my-reviews__new-body {
@@ -118,6 +121,13 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   padding-top: 30px;
+}
+
+.my-reviews__text {
+  opacity: 0.7;
+  color: $text-color;
+  font-weight: 600;
+  line-height: $l-height;
 }
 
 .my-reviews__controls {

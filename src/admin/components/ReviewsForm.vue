@@ -20,8 +20,8 @@
           ).my-reviews__block
           simple-input(
             label="Титул автора"
-            v-model="reviewData.position"
-            :error-message="validation.firstError('reviewData.position')"
+            v-model="reviewData.occ"
+            :error-message="validation.firstError('reviewData.occ')"
           ).my-reviews__block
           //- label.my-reviews__block
           //-   .my-reviews__content-title Имя автора
@@ -52,7 +52,7 @@ import SimpleVueValidation, { Validator } from 'simple-vue-validator';
 
 const emptyReviewData = {
   author: '',
-  position: '',
+  occ: '',
   text: '',
   photo: null,
 };
@@ -89,7 +89,7 @@ export default {
     'reviewData.author': (value) => {
       return Validator.value(value).required('Введите автора');
     },
-    'reviewData.position': (value) => {
+    'reviewData.occ': (value) => {
       return Validator.value(value).required('Введите титул');
     },
     'reviewData.text': (value) => {
@@ -114,10 +114,10 @@ export default {
         }
       });
     },
-    created() {
-      this.updateReviewData();
-    },
-  }
+  },
+  created() {
+    this.updateReviewData();
+  },
 }
 </script>
 

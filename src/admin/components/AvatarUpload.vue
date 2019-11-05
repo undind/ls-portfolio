@@ -9,7 +9,7 @@
       @change="handlePhotoUpload"
     )
     button.my-reviews__edit-link(
-      @click="uploadFile"
+      @click.prevent="uploadFile"
     ) {{ value ? 'Изменить фото' : 'Добавить фото' }}
     transition(name="slide-up")
       .avatar-upload__error(v-if="errorMessage")

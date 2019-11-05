@@ -6,7 +6,7 @@ import store from '../store';
 
 Vue.use(VueRouter);
 
-const baseURL = 'https://webdev-api.loftschool.com/';
+const baseURL = 'https://webdev-api.loftschool.com';
 const guard = axios.create({
   baseURL
 });

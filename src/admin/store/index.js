@@ -3,10 +3,12 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-import user from './modules/user';
+import user from '@/store/modules/user';
+import reviews from '@/store/modules/reviews';
 
 export default new Vuex.Store({
   modules: {
-    user
+    user,
+    reviews
   }
 });

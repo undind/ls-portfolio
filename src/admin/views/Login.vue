@@ -11,3 +11,14 @@ export default {
   }
 }
 </script>
+
+<style lang="postcss" scoped>
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(45, 60, 78, 0.9);
+}
+</style>

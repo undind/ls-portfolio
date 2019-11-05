@@ -44,7 +44,7 @@ export default {
     },
     maxHeight: {
       type: Number,
-      default: 120
+      default: 160
     },
     size: {
       type: String,
@@ -97,8 +97,10 @@ export default {
   font-size: 16px;
   font-weight: inherit;
   line-height: 1.5;
+  font-weight: 600;
   padding: 20px;
   background: none;
+  resize: none;
   outline: none;
   border: 1px solid rgba($text-color, 0.5);
   transition: border 0.2s ease;
