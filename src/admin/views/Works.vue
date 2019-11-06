@@ -3,59 +3,117 @@
     .admin-container
       .works__header
         .works__title {{$route.meta.title}}
-      .my-works__card
-        .my-works__header
-          .my-works__title Добавление работы
-        .my-works__body
-          .my-works__edit
-            .my-works__edit-text Перетащите или загрузите для загрузки изображения
-            button.app-button.my-works__edit-btn Загрузить
-          .my-works__content
-            .my-works__row
-              label.my-works__block
-                .my-works__content-title Название
-                input.app-input.my-works__input
-            .my-works__row
-              label.my-works__block
-                .my-works__content-title Ссылка
-                input.app-input.my-works__input
-            .my-works__row
-              label.my-works__block
-                .my-works__content-title Описание
-                textarea.app-textarea
-            .my-works__row
-              label.my-works__block
-                .my-works__content-title Добавление тэга
-                input.app-input.my-works__input
-            .my-works__content-buttons
-              button.app-button__reset Отмена
-              button.app-button Сохранить
+      .my-works__card(v-if="isShowForm")
+        works-form(
+          :current-work="currentWork"
+          @reset="cencelWorkChanges"
+          @create="createNewWork"
+          @update="updateCurWork"
+        )
       .my-works__new
-        .works-new__add
-          button.works-new__button
-            icon.works-new__button-icon(name="Plus")
-          .works-new__desc Добавить работу
-        .works-new__edit
-          .works-new__img
-            img(src="../../images/admin/admin-works.png")
-          .works-new__body
-            label.works-new__label
-              .works-new__text Новая работа
-              input.app-input.works-new__input(placeholder="Описание работы")
-            a.works-new__link(href="http://loftschool.ru") http://loftschool.ru
-            .works-new__controls
-              button.works-new__control
-                .works-new__control-text Править
-                icon.works-new__icon.works-icon__accept(name="Pencil")
-              button.works-new__control
-                .works-new__control-text Удалить
-                icon.works-new__icon.works-icon__delete(name="Cross")
+        gradient-button(
+          :is-disabled="isShowForm && !currentWork"
+          @click="addWork"
+        ) Добавить #[br] работу
+        work-item(
+          v-for="item in works"
+          :key="item.id"
+          :work="item"
+          :is-active="item === currentWork"
+          @edit="editWork(item)"
+          @delete="deleteCurWork(item.id)"
+        )
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+
 export default {
-   components: {
+  components: {
+    WorksForm: () => import("components/WorksForm.vue"),
+    WorkItem: () => import("components/WorkItem.vue"),
+    GradientButton: () => import("components/GradientButton.vue"),
     Icon: () => import("components/Icon.vue")
-  }
+  },
+  data() {
+    return {
+      currentWork: null,
+      isShowForm: false
+    };
+  },
+  computed: {
+    ...mapState('works', { works: state => state.works })
+  },
+  methods: {
+    ...mapActions('works', ['createWork', 'fetchWorks', 'deleteWork', 'updateWork']),
+    async createNewWork(data) {
+      try {
+        await this.createWork(data);
+      } catch (error) {
+        console.log('Работы не была создана');
+      }
+      
+      this.hideForm();
+    },
+    async deleteCurWork(id) {
+      try {
+        await this.deleteWork(id);
+      } catch (error) {
+        console.log('Работа не была удалена');
+      }
+    },
+    async updateCurWork(data) {
+      try {
+        await this.updateWork(data);
+      } catch (error) {
+        console.log('Работы не была обновлена');
+      }
+
+      this.hideForm();
+    },
+    showForm() {
+      this.isShowForm = true;
+    },
+    hideForm() {
+      this.isShowForm = false;
+    },
+    addWork() {
+      this.currentWork = null;
+      this.showForm();
+    },
+    cencelWorkChanges() {
+      this.currentWork = null;
+      this.hideForm();
+    },
+    editWork(work) {
+      this.currentWork = work;
+      this.showForm();
+    }
+  },
+  async created() {
+    try {
+      await this.fetchWorks();
+    } catch (error) {
+      console.log('Произошла ошибка при загрузке работ');
+    }
+  },
 }
 </script>
+
+<style lang="postcss" scoped>
+@import "../../styles/mixins.pcss";
+
+.my-works__new {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 30px;
+
+  @include desktop {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include tablets {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

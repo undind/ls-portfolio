@@ -8,9 +8,6 @@
           v-model="reviewData.photo"
           :error-message="validation.firstError('reviewData.photo')"
         )
-        //- button.my-reviews__edit-btn
-        //-   icon.my-reviews__edit-icon(name="user")
-        //- button.my-reviews__edit-link Добавить фото
       .my-reviews__content
         .my-reviews__row
           simple-input(
@@ -23,21 +20,12 @@
             v-model="reviewData.occ"
             :error-message="validation.firstError('reviewData.occ')"
           ).my-reviews__block
-          //- label.my-reviews__block
-          //-   .my-reviews__content-title Имя автора
-          //-   input.app-input.my-reviews__input
-          //- label.my-reviews__block
-          //-   .my-reviews__content-title Титул автора
-          //-   input.app-input.my-reviews__input
         .my-works__row
           simple-textarea(
             label="Отзыв"
             v-model="reviewData.text"
             :error-message="validation.firstError('reviewData.text')"
           )
-          //- label.my-reviews__block.my-reviews__block-textarea
-          //-   .my-reviews__content-title Отзыв
-          //-   textarea.app-textarea
         .my-reviews__content-buttons
           button(
             @click.prevent="$emit('reset')"
@@ -62,7 +50,6 @@ export default {
     AvatarUpload: () => import("components/AvatarUpload.vue"),
     SimpleInput: () => import("components/SimpleInput.vue"),
     SimpleTextarea: () => import("components/SimpleTextarea.vue"),
-    Icon: () => import("components/Icon.vue")
   },
   props: {
     currentReview: {

@@ -15,9 +15,6 @@
           :is-disabled="isShowForm && !currentReview"
           @click="addReview"
         ) Добавить #[br] отзыв
-          //- button.my-reviews__button
-          //-   icon.my-reviews__button-icon(name="Plus")
-          //- .my-reviews__desc Добавить отзыв
         review-item(
           v-for="item in reviews"
           :key="item.id"
@@ -36,7 +33,6 @@ export default {
     ReviewsForm: () => import("components/ReviewsForm.vue"),
     ReviewItem: () => import("components/ReviewItem.vue"),
     GradientButton: () => import("components/GradientButton.vue"),
-    Icon: () => import("components/Icon.vue")
   },
   data() {
     return {
