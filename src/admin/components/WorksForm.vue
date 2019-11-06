@@ -29,7 +29,7 @@
             :error-message="validation.firstError('workData.description')"
           )
         .my-works__row
-          simple-input(
+          tags-input(
             label="Добавление тэга"
             v-model="workData.techs"
             :error-message="validation.firstError('workData.techs')"
@@ -56,6 +56,7 @@ const emptyWorkData = {
 
 export default {
   components: {
+    TagsInput: () => import('components/TagsInput.vue'),
     SimpleInput: () => import('components/SimpleInput.vue'),
     SimpleTextarea: () => import('components/SimpleTextarea.vue'),
     PictureUpload: () => import('components/PictureUpload.vue'),

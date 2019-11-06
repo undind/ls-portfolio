@@ -1,7 +1,11 @@
 <template lang="pug">
   .works-new__item(:class="{ 'works-new__active': isActive }")
-    .works-new__img
+    .works-new__preview
       img(:src="imageSrc")
+      .works-new__tags
+        tags(
+          :tags="tags"
+        )
     .works-new__body
       .works-new__label
         .works-new__title {{work.title}}
@@ -25,7 +29,8 @@ import { getAbsoluteImgPath } from '@/helpers/pictures';
 
 export default {
   components: {
-    Icon: () => import("components/Icon.vue")
+    Icon: () => import("components/Icon.vue"),
+    Tags: () => import('components/Tags.vue')
   },
   props: {
     work: {
@@ -40,6 +45,9 @@ export default {
   computed: {
     imageSrc() {
       return getAbsoluteImgPath(this.work.photo);
+    },
+    tags() {
+      return this.work.techs.split(',');
     },
   },
 }
@@ -76,9 +84,18 @@ export default {
   justify-content: space-between;
 }
 
-.works-new__img {
+.works-new__preview {
   display: flex;
   justify-content: center;
+  position: relative;
+}
+
+.works-new__tags {
+  position: absolute;
+  bottom: 9px;
+  right: 0;
+  display: flex;
+  align-items: center;
 }
 
 .works-new__title {
