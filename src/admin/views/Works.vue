@@ -103,6 +103,35 @@ export default {
 <style lang="postcss" scoped>
 @import "../../styles/mixins.pcss";
 
+.my-works {
+  padding-top: 60px;
+  padding-bottom: 100px;
+}
+
+.works__header {
+  padding-bottom: 60px;
+
+  @include tablets {
+    padding-left: 15px;
+  }
+}
+
+.works__title {
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.my-works__card {
+  box-shadow: $admin-shadow;
+  background-color: #ffffff;
+  padding: 30px;
+  margin-bottom: 50px;
+
+  @include phones {
+    padding: 0;
+  }
+}
+
 .my-works__new {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

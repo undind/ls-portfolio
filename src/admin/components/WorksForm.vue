@@ -122,5 +122,47 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
+@import "../../styles/mixins.pcss";
 
+.my-works__header {
+  border-bottom: 1px solid rgba(#1f232d, 0.15);
+  padding-bottom: 20px;
+  padding-left: 15px;
+}
+
+.my-works__title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.my-works__body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 50px 8px 0;
+  grid-gap: 20px;
+
+  @include tablets {
+    grid-template-columns: 1fr;
+    justify-content: center;
+    padding: 30px 50px;
+  }
+
+  @include tablets {
+    padding: 20px 15px;
+  }
+}
+
+.my-works__row {
+  margin-bottom: 30px;
+}
+
+.my-works__content-buttons {
+  margin-top: 60px;
+  display: flex;
+  justify-content: flex-end;
+
+  @include tablets {
+    justify-content: center;
+  }
+}
 </style>
