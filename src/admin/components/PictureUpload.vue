@@ -1,12 +1,19 @@
 <template lang="pug">
   .picture-upload
-    label.picture-upload__control(for="file-input")
+    label.picture-upload__control(
+      for="file-input"
+      :class="{ 'picture-upload__control-drag': isDragImage }"
+      @dragenter.prevent="dragenterFocusIn"
+      @dragover.prevent="dragenterFocusIn"
+      @dragleave.prevent="dragenterFocusOut"
+      @drop.prevent="handleDrop"
+    )
       .picture-upload__edit(v-if="!renderedPhoto")
         .picture-upload__edit-text Перетащите или загрузите для загрузки изображения
         button(
           @click.prevent="uploadFile"
         ).app-button.picture-upload__edit-btn Загрузить
-      img.picture-upload__image(v-else :src="renderedPhoto")
+      img.picture-upload__image(v-else-if="renderedPhoto && !isDragImage" :src="renderedPhoto")
     input.picture-upload__file#file-input(
       ref="file-input"
       type="file"
@@ -15,7 +22,7 @@
     )
     button.app-button.picture-upload__edit-link(
       v-if="renderedPhoto"
-      @click.prevent="uploadFile"
+      @click.prevent="uploadFile($event.target.files[0])"
     ) Изменить
     transition(name="slide-up")
       .picture-upload__error(v-if="errorMessage")
@@ -50,6 +57,7 @@ export default {
   },
   data() {
     return {
+      isDragImage: false,
       renderedPhoto: null
     };
   },
@@ -77,8 +85,18 @@ export default {
         this.$emit("input", null);
       }
     },
-    async handlePhotoUpload(e) {
-      const file = e.target.files[0];
+    dragenterFocusIn(e) {
+      this.isDragImage = true;
+    },
+    dragenterFocusOut() {
+      this.isDragImage = false;
+    },
+    handleDrop({ dataTransfer }) {
+      const file = dataTransfer.files[0];
+      this.handlePhotoUpload(file);
+      this.isDragImage = false;
+    },
+    async handlePhotoUpload(file) {
       if (file.size > this.maxSize) {
         alert("Слишком большой размер файла (максимум 1.5MB)");
         return;
@@ -105,6 +123,12 @@ export default {
   width: 100%;
   min-height: 276px;
   cursor: pointer;
+}
+
+.picture-upload__control-drag {
+  & .picture-upload__edit {
+    background-color: #dee4dd;
+  }
 }
 
 .picture-upload__edit {

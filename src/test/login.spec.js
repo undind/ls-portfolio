@@ -20,7 +20,7 @@ test('На странице есть кнопка "Авторизоваться"
     // .screenshot()
     // .then((screenshots) => {
     //   for (const browserName in screenshots) {
-    //     fs.writeFileSync(`../screenshots/login_form_${browserName}.png`, screenshots[browserName].value, 'base64');
+    //     fs.writeFileSync(`./screenshots/login_form_${browserName}.png`, screenshots[browserName].value, 'base64');
     //   }
     // });
 });

@@ -4,7 +4,7 @@ const shared = {
   path: '/wd/hub',
   coloredLogs: true,
   waitforTimeout: 10000,
-  screenshotPath: './screenshots/',
+  screenshotPath: './',
   connectionRetryTimeout: 90000,
   connectionRetryCount: 3,
   maxInstances: 1,
