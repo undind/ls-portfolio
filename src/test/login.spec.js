@@ -17,12 +17,12 @@ test('На странице есть кнопка "Авторизоваться"
         expect(browsers[browserName]).toBe(true);
       }
     })
-    // .screenshot()
-    // .then((screenshots) => {
-    //   for (const browserName in screenshots) {
-    //     fs.writeFileSync(`./screenshots/login_form_${browserName}.png`, screenshots[browserName].value, 'base64');
-    //   }
-    // });
+    .screenshot()
+    .then((screenshots) => {
+      for (const browserName in screenshots) {
+        fs.writeFileSync(`./screenshots/login_form_${browserName}.png`, screenshots[browserName].value, 'base64');
+      }
+    });
 });
 
 afterAll(() => {

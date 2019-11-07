@@ -1,5 +1,6 @@
 import Vue from "vue";
 import constants from '../styles/variables.json';
+import axios from 'axios';
 
 const thumbs = {
   template: "#slider-thumbs",
@@ -132,19 +133,18 @@ new Vue({
     },
   },
   methods: {
-    makeArrayWithRequiredImg(data) {
-      return data.map(item => {
-        const requiredPic = require(`../images/slider/${item.photo}`);
-        item.photo = requiredPic;
-        return item;
-      })
+    async fetchWorks() {
+      const { data: works } = await axios.get(`${process.env.BASE_URL}/works/${process.env.USER_ID}`);
+      this.works = works.map(item => ({
+        ...item,
+        photo: `${process.env.BASE_URL}/${item.photo}`
+      }));
     },
     changeSlide(value) {
       this.currentWorkIndex = value;
     }
   },
   created() {
-    const data = require('../data/works.json');
-    this.works = this.makeArrayWithRequiredImg(data);
+    this.fetchWorks();
   },
 });

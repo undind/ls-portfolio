@@ -6,6 +6,7 @@ const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const Dotenv = require('dotenv-webpack');
 
 module.exports = (env, argv) => {
   const isProductionBuild = argv.mode === "production";
@@ -126,6 +127,7 @@ module.exports = (env, argv) => {
         favicon: "src/images/favicon/favicon.png",
         chunks: ["admin"]
       }),
+      new Dotenv(),
       new SpriteLoaderPlugin({ plainSprite: true }),
       new VueLoaderPlugin()
     ],
