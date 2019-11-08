@@ -11,9 +11,11 @@
       .picture-upload__edit(v-if="!renderedPhoto")
         .picture-upload__edit-text Перетащите или загрузите для загрузки изображения
         button(
-          @click.prevent="uploadFile"
+          @click="uploadFile($event.target.files[0])"
         ).app-button.picture-upload__edit-btn Загрузить
-      img.picture-upload__image(v-else-if="renderedPhoto && !isDragImage" :src="renderedPhoto")
+      img.picture-upload__image(
+        v-if="renderedPhoto && !isDragImage"
+        :src="renderedPhoto")
     input.picture-upload__file#file-input(
       ref="file-input"
       type="file"
@@ -22,7 +24,7 @@
     )
     button.app-button.picture-upload__edit-link(
       v-if="renderedPhoto"
-      @click.prevent="uploadFile($event.target.files[0])"
+      @click="uploadFile($event.target.files[0])"
     ) Изменить
     transition(name="slide-up")
       .picture-upload__error(v-if="errorMessage")

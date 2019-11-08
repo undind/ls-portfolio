@@ -4,7 +4,14 @@ import axios from 'axios';
 
 const thumbs = {
   template: "#slider-thumbs",
-  props: ["works", "currentIndex"]
+  props: {
+    works: {
+      type: Array
+    },
+    currentIndex: {
+      type: Number
+    }
+  }
 };
 
 const btns = {
@@ -105,16 +112,36 @@ const display = {
 
 const tags = {
   template: "#slider-tags",
-  props: ["tags"]
+  props: {
+    tags: {
+      type: Array
+    }
+  }
 };
 
 const info = {
   template: "#slider-info",
-  components: { tags },
-  props: ["currentWork"],
+  components: { 
+    tags
+  },
+  props: {
+    techs: {
+      type: String,
+      default: '',
+    },
+    title: {
+      type: String,
+    },
+    description: {
+      type: String,
+    },
+    link: {
+      type: String,
+    },
+  },
   computed: {
     tagsArray() {
-      return this.currentWork.skills.split(', ');
+      return this.techs.split(', ');
     }
   },
 };

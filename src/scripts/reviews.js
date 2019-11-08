@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import axios from 'axios';
 import reviews from '../data/reviews';
 import Flickity from 'vue-flickity';
 
