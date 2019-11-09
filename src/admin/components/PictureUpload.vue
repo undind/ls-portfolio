@@ -21,7 +21,7 @@
       ref="file-input"
       type="file"
       accept="image/jpeg,image/png"
-      @change="handlePhotoUpload"
+      @change="handlePhotoUpload($event.target.files[0])"
     )
     button.app-button.picture-upload__edit-link(
       v-if="renderedPhoto"
@@ -187,6 +187,20 @@ export default {
   &-leave-to {
     transform: translateY(50%);
     opacity: 0;
+  }
+}
+
+.app-button {
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 25px;
+  padding: 20px 45px;
+  background-image: linear-gradient(to right, #006aed 0%, #3f35cb 100%);
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.85;
   }
 }
 </style>

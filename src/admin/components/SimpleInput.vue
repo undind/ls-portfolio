@@ -97,6 +97,15 @@ export default {
 <style lang="postcss" scoped>
 @import '../../styles/mixins.pcss';
 
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
 .simple-input {
   position: relative;
   width: 100%;

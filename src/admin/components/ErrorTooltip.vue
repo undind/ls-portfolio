@@ -11,6 +11,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 48px;
+  white-space: nowrap;
 
   &::before,
   &::after {
