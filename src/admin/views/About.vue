@@ -1,5 +1,10 @@
 <template lang="pug">
-  section.about-section
+  .about__loader(v-if="isLoading")
+      pulse-loader(
+        :color="accentColor"
+        :size="50"
+      )
+  section.about-section(v-else)
     .admin-container
       .about__header
         h1.about__title {{$route.meta.title}}
@@ -33,16 +38,21 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import { PulseLoader } from '@saeris/vue-spinners';
+import * as variables from '../../styles/variables.json';
 
 export default {
    components: {
     NewSkillGroup: () => import("components/NewSkillGroup.vue"),
     SkillGroup: () => import("components/SkillGroup.vue"),
-    Icon: () => import("components/Icon.vue")
+    Icon: () => import("components/Icon.vue"),
+    PulseLoader
   },
   data() {
     return {
       isShowNewSkill: false,
+      isLoading: false,
+      accentColor: variables['admin-color'],
     };
   },
   computed: {
@@ -156,6 +166,18 @@ export default {
 
 .about-section {
   padding: 60px 0;
+  position: relative;
+}
+
+.about__loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .about__header {

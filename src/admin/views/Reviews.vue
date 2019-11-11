@@ -1,5 +1,10 @@
 <template lang="pug">
-  section.my-reviews
+  .reviews__loader(v-if="isLoading")
+    pulse-loader(
+      :color="accentColor"
+      :size="50"
+    )
+  section.my-reviews(v-else)
     .admin-container
       .reviews__header
         .reviews__title {{$route.meta.title}}
@@ -28,18 +33,23 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import { PulseLoader } from '@saeris/vue-spinners';
+import * as variables from '../../styles/variables.json';
 
 export default {
   components: {
     ReviewsForm: () => import("components/ReviewsForm.vue"),
     ReviewItem: () => import("components/ReviewItem.vue"),
     GradientButton: () => import("components/GradientButton.vue"),
+    PulseLoader
   },
   data() {
     return {
       currentReview: null,
       isShowForm: false,
       isSendingForm: false,
+      isLoading: false,
+      accentColor: variables['admin-color'],
     };
   },
   computed: {
@@ -102,13 +112,20 @@ export default {
       this.currentReview = review;
       this.showForm();
     },
-  },
-  async created() {
-    try {
-      await this.fetchReviews();
-    } catch (error) {
-      this.showTooltip({ type: 'error', text: 'Произошла ошибка при загрузке отзывов', duration: 3000 });
+    async fetchData() {
+      this.isLoading = true;
+
+      try {
+        await this.fetchReviews();
+      } catch (e) {
+        this.showTooltip({ type: 'error', text: 'Произошла ошибка при загрузке отзывов', duration: 3000 });
+      } finally {
+        this.isLoading = false;
+      }
     }
+  },
+  created() {
+    this.fetchData();
   }
 }
 </script>
@@ -127,6 +144,17 @@ export default {
   @include tablets {
     padding-left: 15px;
   }
+}
+
+.reviews__loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .reviews__title {

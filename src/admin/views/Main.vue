@@ -20,5 +20,6 @@ export default {
   flex-direction: column;
   min-height: 100vh;
   background-color: rgba(255, 255, 255, 0.9);
+  position: relative;
 }
 </style>
