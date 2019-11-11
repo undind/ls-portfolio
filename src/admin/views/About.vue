@@ -188,6 +188,11 @@ export default {
   @include tablets {
     padding-left: 15px;
   }
+
+  @include phones {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .about__title {
@@ -207,6 +212,11 @@ export default {
 
 .about__header-add {
   margin-left: 60px;
+
+  @include phones {
+    margin-left: 0;
+    margin-top: 25px;
+  }
 }
 
 .about__header-btn-wrap {

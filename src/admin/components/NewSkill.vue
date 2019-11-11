@@ -79,6 +79,11 @@ export default {
 .new-skill__form {
   display: flex;
   justify-content: flex-end;
+
+  @include phones {
+    justify-content: center;
+    padding: 0 15px;
+  }
 }
 
 .new-skill__title {

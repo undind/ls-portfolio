@@ -134,6 +134,10 @@ export default {
   border-bottom: 1px solid rgba(#1f232d, 0.15);
   padding-bottom: 20px;
   padding-left: 15px;
+
+  @include phones {
+    padding-top: 20px;
+  }
 }
 
 .my-works__title {

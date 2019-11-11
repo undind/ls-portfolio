@@ -95,5 +95,9 @@ export default {
 
 .skill-group__skills-table {
   padding-top: 20px;
+
+  @include phones {
+    padding-left: 15px;
+  }
 }
 </style>
