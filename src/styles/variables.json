@@ -4,6 +4,8 @@
   "light-gray": "#898989",
   "admin-color": "#383bcf",
   "danger-color": "#bf2929",
+  "success-color": "#4bb133",
+  "error-color": "#b13333",
   "admin-gradient": "linear-gradient(to right, #006aed 0%, #3f35cb 100%)",
   "admin-shadow": "4px 3px 20px rgba(0, 0, 0, 0.07)",
   "accent-color": "#383bcf",

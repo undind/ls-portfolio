@@ -22,11 +22,13 @@
       .login-form__button
         basic-button(
           type="submit"
+          :disabled="isLoading || !user.name.length || user.password.length < 3"
         ) ОТПРАВИТЬ
 </template>
 
 <script>
   import Vue from 'vue';
+  import { mapActions } from 'vuex';
   import SimpleVueValidation from 'simple-vue-validator';
   import $axios from '@/requests';
 
@@ -45,7 +47,8 @@
         user: {
           name: '',
           password: '',
-        }
+        },
+        isLoading: false,
       };
     },
     validators: {
@@ -60,6 +63,7 @@
       },
     },
     methods: {
+      ...mapActions('tooltips', ['showTooltip']),
       signIn() {
         this.$validate().then((success) => {
           if (success) {
@@ -68,6 +72,8 @@
         });
       },
       async login() {
+        this.isLoading = true;
+        
         try {
           const response = await $axios.post('/login', this.user);
           const token = response.data.token;
@@ -77,9 +83,11 @@
 
           this.$router.replace("/");
         } catch (error) {
-          alert('FALSE');
+          this.showTooltip({ type: 'error', text: 'Не корректное имя или пароль', duration: 3000 });
           this.user.password = '';
         }
+
+        this.isLoading = false;
       },
       exitFromAdmin() {
         location.href = 'https://undind.github.io/ls-portfolio/';

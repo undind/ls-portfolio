@@ -28,10 +28,12 @@
           )
         .my-reviews__content-buttons
           button(
+            :disabled="isSending"
             @click.prevent="$emit('reset')"
           ).app-button__reset Отмена
           button(
             type="submit"
+            :disabled="isSending"
           ).app-button Сохранить
 </template>
 
@@ -55,6 +57,10 @@ export default {
     currentReview: {
       type: Object,
       default: null,
+    },
+    isSending: {
+      type: Boolean,
+      default: false
     }
   },
   watch: {
@@ -213,6 +219,11 @@ export default {
   &:hover {
     opacity: 0.85;
   }
+
+  &:disabled {
+    opacity: 0.2;
+    cursor: default;
+  }
 }
 
 .app-button {
@@ -226,6 +237,11 @@ export default {
 
   &:hover {
     opacity: 0.85;
+  }
+
+  &:disabled {
+    opacity: 0.2;
+    cursor: default;
   }
 }
 </style>

@@ -125,9 +125,9 @@
     &__disabled {
       cursor: default;
 
-      &:hover {
+      /* &:hover {
         background-image: none;
-      }
+      } */
       
       &::after {
         content: '';

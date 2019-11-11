@@ -5,6 +5,7 @@
         .reviews__title {{$route.meta.title}}
       .my-reviews__card(v-if="isShowForm")
         reviews-form(
+          :is-sending="isSendingForm"
           :current-review="currentReview"
           @reset="cancelReviewChanges"
           @create="createNewReview"
@@ -37,29 +38,40 @@ export default {
   data() {
     return {
       currentReview: null,
-      isShowForm: false
+      isShowForm: false,
+      isSendingForm: false,
     };
   },
   computed: {
     ...mapState('reviews', { reviews: state => state.reviews })
   },
   methods: {
+    ...mapActions('tooltips', ['showTooltip']),
     ...mapActions('reviews', ['createReview', 'fetchReviews', 'deleteReview', 'updateReview']),
     async createNewReview(data) {
+      this.isSendingForm = true;
+
       try {
         await this.createReview(data);
+        this.showTooltip({ type: 'success', text: 'Отзыв успешно создан', duration: 3000 });
       } catch (error) {
-        console.log('Отзыв не был создан');
+        this.showTooltip({ type: 'success', text: e.message, duration: 3000 });
+      } finally {
+        this.isSendingForm = false;
       }
 
       this.hideForm();
     },
     async updateCurReview(data) {
+      this.isSendingForm = true;
+
       try {
         await this.updateReview(data);
-        console.log(data);
+        this.showTooltip({ type: 'success', text: 'Отзыв успешно обновлен', duration: 3000 });
       } catch (error) {
-        console.log('Отзыв не был обновлен');
+        this.showTooltip({ type: 'error', text: e.message, duration: 3000 });
+      } finally {
+        this.isSendingForm = false;
       }
 
       this.hideForm();
@@ -67,8 +79,9 @@ export default {
     async deleteCurReview(id) {
       try {
         await this.deleteReview(id);
+        this.showTooltip({ type: 'success', text: 'Отзыв успешно удален', duration: 3000 });
       } catch (error) {
-        console.log('Отзыв не был удален');
+        this.showTooltip({ type: 'error', text: e.message, duration: 3000 });
       }
     },
     showForm() {
@@ -94,7 +107,7 @@ export default {
     try {
       await this.fetchReviews();
     } catch (error) {
-      console.log('Произошла ошибка при загрузке отзывов');
+      this.showTooltip({ type: 'error', text: 'Произошла ошибка при загрузке отзывов', duration: 3000 });
     }
   }
 }

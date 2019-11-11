@@ -5,6 +5,7 @@
         .works__title {{$route.meta.title}}
       .my-works__card(v-if="isShowForm")
         works-form(
+          :is-sending="isSendingForm"
           :current-work="currentWork"
           @reset="cencelWorkChanges"
           @create="createNewWork"
@@ -38,19 +39,26 @@ export default {
   data() {
     return {
       currentWork: null,
-      isShowForm: false
+      isShowForm: false,
+      isSendingForm: false,
     };
   },
   computed: {
     ...mapState('works', { works: state => state.works })
   },
   methods: {
+    ...mapActions('tooltips', ['showTooltip']),
     ...mapActions('works', ['createWork', 'fetchWorks', 'deleteWork', 'updateWork']),
     async createNewWork(data) {
+      this.isSendingForm = true;
+
       try {
         await this.createWork(data);
+        this.showTooltip({ type: 'success', text: 'Работа успешно создана', duration: 3000 });
       } catch (error) {
-        console.log('Работы не была создана');
+        this.showTooltip({ type: 'error', text: error.message, duration: 3000 });
+      } finally {
+        this.isSendingForm = false;
       }
       
       this.hideForm();
@@ -58,15 +66,21 @@ export default {
     async deleteCurWork(id) {
       try {
         await this.deleteWork(id);
+        this.showTooltip({ type: 'success', text: 'Работа успешно удалена', duration: 3000 });
       } catch (error) {
-        console.log('Работа не была удалена');
+        this.showTooltip({ type: 'error', text: error.message, duration: 3000 });
       }
     },
     async updateCurWork(data) {
+      this.isSendingForm = true;
+
       try {
         await this.updateWork(data);
+        this.showTooltip({ type: 'success', text: 'Работа успешно обновлена', duration: 3000 });
       } catch (error) {
-        console.log('Работы не была обновлена');
+        this.showTooltip({ type: 'error', text: error.message, duration: 3000 });
+      } finally {
+        this.isSendingForm = false;
       }
 
       this.hideForm();
@@ -94,7 +108,7 @@ export default {
     try {
       await this.fetchWorks();
     } catch (error) {
-      console.log('Произошла ошибка при загрузке работ');
+      this.showTooltip({ type: 'error', text: 'Произошла ошибка при загрузке работ', duration: 3000 });
     }
   },
 }

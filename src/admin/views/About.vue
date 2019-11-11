@@ -64,6 +64,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions('tooltips', ['showTooltip']),
     ...mapActions('skills', [
       'fetchSkills',
       'addSkill',
@@ -83,8 +84,9 @@ export default {
     async createCategory(value) {
       try {
         await this.addNewSkillGroup(value);
+        this.showTooltip({ type: 'success', text: 'Группа успешно добавлена', duration: 3000 });
       } catch (e) {
-        console.log(e);
+        this.showTooltip({ type: 'error', text: e.message, duration: 3000 });
       }
       this.isShowNewSkill = false;
     },
@@ -95,36 +97,41 @@ export default {
       }
       try {
         await this.updateSkillGroup({ id, title });
+        this.showTooltip({ type: 'success', text: 'Группа успешно обновлена', duration: 3000 });
       } catch (e) {
-        console.log(e);
+        this.showTooltip({ type: 'error', text: e.message, duration: 3000 });
       }
     },
     async createSkill(category, data) {
       try {
         await this.addSkill({ ...data, category });
+        this.showTooltip({ type: 'success', text: 'Навык успешно добавлен', duration: 3000 });
       } catch (e) {
-        console.log(e);
+        this.showTooltip({ type: 'error', text: e.message, duration: 3000 });
       }
     },
     async updateSkill(data) {
       try {
         await this.editSkill(data);
+        this.showTooltip({ type: 'success', text: 'Навык успешно обновлен', duration: 3000 });
       } catch (e) {
-        console.log(e);
+        this.showTooltip({ type: 'error', text: e.message, duration: 3000 });
       }
     },
     async deleteSkill(id) {
       try {
         this.removeSkill(id);
+        await this.showTooltip({ type: 'success', text: 'Навык успешно удален', duration: 3000 });
       } catch (e) {
-        console.log(e);
+        this.showTooltip({ type: 'error', text: e.message, duration: 3000 });
       }
     },
     async deleteSkillGroup(id) {
       try {
         await this.removeSkillGroup(id);
+        this.showTooltip({ type: 'success', text: 'Группа успешно удалена', duration: 3000 });
       } catch (e) {
-        console.log(e);
+        this.showTooltip({ type: 'error', text: e.message, duration: 3000 });
       }
     },
     async fetchData() {
@@ -132,7 +139,7 @@ export default {
       try {
         await Promise.all([this.fetchSkills(), this.fetchCategories()]);
       } catch (e) {
-        console.log(e);
+        this.showTooltip({ type: 'error', text: 'Произошла ошибка при загрузке данных', duration: 3000 });
       } finally {
         this.isLoading = false;
       }
