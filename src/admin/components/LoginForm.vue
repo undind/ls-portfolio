@@ -22,7 +22,7 @@
       .login-form__button
         basic-button(
           type="submit"
-          :disabled="isLoading || !user.name.length || user.password.length < 3"
+          :disabled="isLoading"
         ) ОТПРАВИТЬ
 </template>
 
@@ -85,9 +85,9 @@
         } catch (error) {
           this.showTooltip({ type: 'error', text: 'Не корректное имя или пароль', duration: 3000 });
           this.user.password = '';
+        } finally {
+          this.isLoading = false;
         }
-
-        this.isLoading = false;
       },
       exitFromAdmin() {
         location.href = 'https://undind.github.io/ls-portfolio/';

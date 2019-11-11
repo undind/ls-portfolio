@@ -38,6 +38,7 @@ export default {
   right: 0;
   transform: translateY(100%);
   transition: 0.3s transform ease;
+  z-index: 999;
 }
 
 .tooltip-container_showed {
