@@ -99,9 +99,16 @@ export default {
 .my-reviews__img {
   width: 50px;
   height: 50px;
+  overflow: hidden;
   margin-right: 20px;
   border-radius: 50%;
   background: svg-load('user.svg', fill=#fff, width=30px, height=30px) center center no-repeat #dee4ed;
+}
+
+.my-reviews__avatar {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 .my-reviews__author {

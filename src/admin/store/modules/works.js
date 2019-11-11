@@ -1,3 +1,5 @@
+import { generateStdError } from '@/helpers/errorHandler';
+
 export default {
   namespaced: true,
   state: {
@@ -32,7 +34,7 @@ export default {
         commit('ADD_WORK', response.data);
         return response;
       } catch (error) {
-        console.log(error);
+        generateStdError(error);
       }
     },
     async fetchWorks({ commit, rootGetters }) {
@@ -42,7 +44,7 @@ export default {
         commit('SET_WORKS', response.data);
         return response;
       } catch (error) {
-        console.log(error);
+        generateStdError(error);
       }
     },
     async deleteWork({ commit }, workId) {
@@ -51,7 +53,7 @@ export default {
         commit('DEL_WORK', workId);
         return response;
       } catch (error) {
-        console.log(error);
+        generateStdError(error);
       }
     },
     async updateWork({ commit }, work) {
@@ -70,7 +72,7 @@ export default {
         commit('EDIT_WORK', response.data.work);
         return response;
       } catch (error) {
-        console.log(error);
+        generateStdError(error);
       }
     }
   }

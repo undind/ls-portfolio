@@ -8,7 +8,7 @@ const review = {
     author: {
       type: String,
     },
-    position: {
+    occ: {
       type: String,
     },
     photo: {

@@ -1,3 +1,5 @@
+import { generateStdError } from '@/helpers/errorHandler';
+
 export default {
   namespaced: true,
   state: {
@@ -32,7 +34,7 @@ export default {
         commit('ADD_REVIEW', response.data);
         return response;
       } catch (error) {
-        console.log(error);
+        generateStdError(error);
       }
     },
     async fetchReviews({ commit, rootGetters }) {
@@ -42,7 +44,7 @@ export default {
         commit('SET_REVIEWS', response.data);
         return response;
       } catch (error) {
-        console.log(error);
+        generateStdError(error);
       }
     },
     async deleteReview({ commit }, reviewId) {
@@ -51,7 +53,7 @@ export default {
         commit('DEL_REVIEW', reviewId);
         return response;
       } catch (error) {
-        console.log(error);
+        generateStdError(error);
       }
     },
     async updateReview({ commit }, review) {
@@ -64,14 +66,13 @@ export default {
         return formData;
       }
       const data = intoFormData(review);
-      console.log(data);
 
       try {
         const response = await this.$axios.post(`/reviews/${review.id}`, data);
         commit('EDIT_REVIEW', response.data.review);
         return response;
       } catch (error) {
-        console.log(error);
+        generateStdError(error);
       }
     }
   }

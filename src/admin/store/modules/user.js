@@ -1,3 +1,5 @@
+import { generateStdError } from '@/helpers/errorHandler';
+
 export default {
   namespaced: true,
   state: {
@@ -30,7 +32,7 @@ export default {
         commit('RESET_USER');
         return response;
       } catch (error) {
-        console.log("Что пошло не так");
+        generateStdError(error);
       }
     }
   }

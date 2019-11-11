@@ -1,3 +1,5 @@
+import { generateStdError } from '@/helpers/errorHandler';
+
 export default {
   namespaced: true,
   state: {
@@ -26,7 +28,7 @@ export default {
         commit('CREATE_CATEGORY', response.data);
         return response;
       } catch (error) {
-        console.log(error);
+        generateStdError(error);
       }
     },
     async updateSkillGroup({ commit }, { id, title }) {
@@ -35,7 +37,7 @@ export default {
         commit('UPDATE_CATEGORY', response.data.category);
         return response;
       } catch (error) {
-        console.log(error);
+        generateStdError(error);
       }
     },
     async removeSkillGroup({ commit }, id) {
@@ -44,7 +46,7 @@ export default {
         commit('DELETE_CATEGORY', id);
         return response;
       } catch (error) {
-        console.log(error);
+        generateStdError(error);
       }
     },
     async fetchCategories({ rootGetters, commit }) {
@@ -54,7 +56,7 @@ export default {
         commit('SET_CATEGORIES', response.data.reverse());
         return response;
       } catch (error) {
-        console.log(error);
+        generateStdError(error);
       }
     },
   },

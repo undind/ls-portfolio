@@ -1,3 +1,5 @@
+import { generateStdError } from '@/helpers/errorHandler';
+
 export default {
   namespaced: true,
   state: {
