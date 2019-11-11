@@ -22,7 +22,7 @@
       .login-form__button
         basic-button(
           type="submit"
-          :disabled="isLoading"
+          :disabled="isLoading || !user.name || user.password.length < 3"
         ) ОТПРАВИТЬ
 </template>
 
