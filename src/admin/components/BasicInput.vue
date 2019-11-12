@@ -104,9 +104,6 @@
       &_invalid:focus {
         border-bottom-color: $danger-color;
       }
-      @include desktop {
-        font-size: 14px;
-      }
     }
 
     &_light &__control {

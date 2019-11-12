@@ -6,16 +6,21 @@ script(type="text/x-template")#slider-container
       :current-index="currentWorkIndex"
       @change-slide="changeSlide"
     )
-    info(
-      :current-work="currentWork"
-    )
+    .works__slider-info
+      info(
+        v-bind="currentWork"
+      )
 
 script(type="text/x-template")#slider-display
   .works__slider-content
     .works__slider-display
       .slider__display(:data-index="currentIndex + 1")
         .slider__display-current
-          img(:src="currentWork.photo" alt="").slider__display-img
+          img(
+            v-if="currentWork"
+            :src="currentWork.photo"
+            :key="currentWork.id"
+            alt="").slider__display-img
         .slider__display-thumbs
           .slider__display-list(:style="`transform: translateY(${offset*100/maxThumbsCount}%)`")
             thumbs(
@@ -55,16 +60,15 @@ script(type="text/x-template")#slider-btns
         +icon('Short Arrow', 'slider__button-icon slider__button-icon-next')
 
 script(type="text/x-template")#slider-info
-  .works__slider-info
-    .slider-info
-      tags(
-        :tags="tagsArray"
-      )
-      .slider-info__title {{currentWork.title}}
-      .slider-info__desc {{currentWork.desc}}
-      a.slider-info__link(:href="currentWork.link" target="_blank")
-        +icon('Link', 'slider-info__link-icon')
-        .slider-info__link-text Посмотреть сайт
+  .slider-info
+    tags(
+      :tags="tagsArray"
+    )
+    .slider-info__title {{title}}
+    .slider-info__desc {{description}}
+    a.slider-info__link(:href="`//${link}`" target="_blank")
+      +icon('Link', 'slider-info__link-icon')
+      .slider-info__link-text Посмотреть сайт
 
 script(type="text/x-template")#slider-tags
   .slider-info__tags

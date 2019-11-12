@@ -6,62 +6,64 @@
     form.login-form__body(@submit.prevent="signIn")
       .login-form__control
         basic-input(
-          v-model="name"
+          v-model="user.name"
           icon="Avatar"
           label="Логин"
-          :error-message="validation.firstError('name')"
+          :error-message="validation.firstError('user.name')"
         )
       .login-form__control
         basic-input(
-          v-model="password"
+          v-model="user.password"
           icon="key"
           label="Пароль"
           type="password"
-          :error-message="validation.firstError('password')"
+          :error-message="validation.firstError('user.password')"
         )
       .login-form__button
         basic-button(
           type="submit"
+          :disabled="isLoading || !user.name || user.password.length < 3"
         ) ОТПРАВИТЬ
 </template>
 
 <script>
   import Vue from 'vue';
+  import { mapActions } from 'vuex';
   import SimpleVueValidation from 'simple-vue-validator';
-  import axios from 'axios';
-  import Icon from './Icon.vue';
-  import BasicInput from './BasicInput.vue';
-  import BasicButton from './BasicButton.vue';
+  import $axios from '@/requests';
 
   Vue.use(SimpleVueValidation);
   const Validator = SimpleVueValidation.Validator;
 
   export default {
     components: {
-      Icon,
-      BasicInput,
-      BasicButton
+      Icon: () => import('components/Icon.vue'),
+      BasicInput: () => import('components/BasicInput.vue'),
+      BasicButton: () => import('components/BasicButton.vue')
     },
     mixins: [SimpleVueValidation.mixin],
     data() {
       return {
-        name: '',
-        password: '',
+        user: {
+          name: '',
+          password: '',
+        },
         isLoading: false,
       };
     },
     validators: {
-      name: (value) => {
+      'user.name': (value) => {
         return Validator.value(value)
           .required('Заполните имя');
       },
-      password: (value) => {
+      'user.password': (value) => {
         return Validator.value(value)
           .required('Введите пароль')
-          .minLength(4, 'Минимум 4 символа');
+          .minLength(3, 'Минимум 3 символа');
       },
     },
     methods: {
+      ...mapActions('tooltips', ['showTooltip']),
       signIn() {
         this.$validate().then((success) => {
           if (success) {
@@ -69,21 +71,23 @@
           }
         });
       },
-      login() {
-        // this.isLoading = true;
-        axios
-          .post('https://webdev-api.loftschool.com/login', {
-            name: this.name,
-            password: this.password
-          })
-          .then((response) => {
-            alert("ВСЕ ОК!");  
-          })
-          .catch((e) => {
-            alert(e.response.data.error);
-          });
-        // this.password = '';
-        // this.isLoading = false;
+      async login() {
+        this.isLoading = true;
+        
+        try {
+          const response = await $axios.post('/login', this.user);
+          const token = response.data.token;
+
+          localStorage.setItem("token", token);
+          $axios.defaults.headers["Authorization"] = `Bearer ${token}`;
+
+          this.$router.replace("/");
+        } catch (error) {
+          this.showTooltip({ type: 'error', text: 'Не корректное имя или пароль', duration: 3000 });
+          this.user.password = '';
+        } finally {
+          this.isLoading = false;
+        }
       },
       exitFromAdmin() {
         location.href = 'https://undind.github.io/ls-portfolio/';
@@ -91,3 +95,63 @@
     },
   }
 </script>
+
+<style lang="postcss" scoped>
+@import '../../styles/mixins.pcss';
+
+.login-form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 563px;
+  width: 100vw;
+  padding: 60px 78px;
+  background-color: white;
+  
+  @include phones {
+    height: 100vh;
+    padding: 30px;
+  }
+}
+
+.login-form__close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background: none;
+  fill: $text-color;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  outline: none;
+  transition: fill 0.2s ease;
+  &:hover {
+    fill: $links-color;
+  }
+}
+
+.login-form__body {
+  @include phones {
+    align-self: stretch;
+  }
+}
+
+.login-form__title {
+  color: $text-color;
+  font-size: 36px;
+  font-weight: 700;
+  @include phones {
+    font-size: 30px;
+  }
+}
+
+.login-form__control {
+  margin-top: 60px;
+}
+
+.login-form__button {
+  margin-top: 40px;
+}
+</style>

@@ -1,49 +1,104 @@
 import Vue from "vue";
+import axios from 'axios';
 
 const skill = {
   template: "#skill",
-  props: ["skillName", "skillPercent"],
-  methods: {
-    drawColoredCircle(value) {
-      const circle = this.$refs["color-circle"];
-      const dashArray = parseInt(
-        getComputedStyle(circle).getPropertyValue("stroke-dasharray")
-      );
-      const percent = (dashArray / 100) * (100 - value);
-      
-      circle.style.strokeDashoffset = percent;
+  props: {
+    title: {
+      type: String,
     },
-    onIntersecting(entries) {
-      entries.forEach((entry) => {
-        if (entry.target === this.$el) {
-          const value = entry.isIntersecting ? this.skillPercent : 0;
-          this.drawColoredCircle(value);
-        }
-      });
+    percent: {
+      type: Number,
+    },
+    isInViewport: {
+      type: Boolean,
+      default: true,
     }
   },
-  mounted() {
-    this.drawColoredCircle();
-
-    const observer = new IntersectionObserver(this.onIntersecting);
-    observer.observe(this.$el);
+  data() {
+    return {
+      r: 40,
+    };
+  },
+  computed: {
+    circumference() {
+      return 2 * Math.PI * this.r;
+    },
+    lineLength() {
+      return this.isInViewport ? this.circumference * (1 - this.percent / 100) : this.circumference;
+    },
   },
 };
 
 const skillsRow = {
   template: "#skills-row",
-  components: { skill },
-  props: ["skill"]
+  components: {
+    skill,
+  },
+  props: {
+    title: {
+      type: String,
+      default: '',
+    },
+    skills: {
+      type: Array,
+      default: () => ([]),
+    },
+    isInViewport: {
+      type: Boolean,
+      default: true,
+    }
+  },
 };
 
 new Vue({
   el: "#skills-components",
   template: "#skills-list",
-  data: () => ({
-    skills: []
-  }),
-  created() {
-    this.skills = require('../data/skills.json');
+  components: {
+    skillsRow,
   },
-  components: { skillsRow }
+  data() {
+    return {
+      skills: [],
+      categories: [],
+      observer: null,
+      isInViewport: false,
+    };
+  },
+  computed: {
+    skillGroups() {
+      return this.categories.map((category) => ({
+        title: category.category,
+        skills: this.skills.filter((skill) => skill.category === category.id),
+      }));
+    },
+  },
+  methods: {
+    async fetchSkills() {
+      const { data: skills } = await axios.get(`${process.env.BASE_URL}/skills/${process.env.USER_ID}`);
+      this.skills = skills;
+    },
+    async fetchCategories() {
+      const { data: categories } = await axios.get(`${process.env.BASE_URL}/categories/${process.env.USER_ID}`);
+      this.categories = categories;
+    },
+    onIntersecting(entries) {
+      entries.forEach((entry) => {
+        if (entry.target === this.$refs.skills) {
+          this.isInViewport = entry.isIntersecting;
+        }
+      })
+    },
+  },
+  created() {
+    this.fetchCategories();
+    this.fetchSkills();
+  },
+  mounted() {
+    this.observer = new IntersectionObserver(this.onIntersecting);
+    this.observer.observe(this.$refs.skills);
+  },
+  beforeDestroy() {
+    this.observer.unobserve(this.$refs.skills);
+  }
 });

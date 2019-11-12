@@ -124,9 +124,11 @@
 
     &__disabled {
       cursor: default;
-      &:hover {
-        background-image: $primary-gradient;
-      }
+
+      /* &:hover {
+        background-image: none;
+      } */
+      
       &::after {
         content: '';
         position: absolute;
@@ -140,9 +142,10 @@
 
     &__flat {
       background-image: none;
-      &:not(.button_disabled):hover {
+      transition: all 0.2s ease;
+      &:not(.basic-button_disabled):hover {
         background-image: none;
-        opacity: 0.6;
+        opacity: 0.8;
       }
     }
 
@@ -166,7 +169,12 @@
     &__circle {
       background: none;
       padding: 0;
+
       &:hover {
+        opacity: 0.7;
+      }
+      
+      &:before {
         background-image: none;
       }
     }
@@ -178,16 +186,16 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background-image: $primary-gradient;
-      transition: background-image 0.2s ease;
+      background-image: $admin-gradient;
+      transition: opacity 0.2s ease;
     }
 
     &__circle:hover &__icon-wrapper {
-      background-image: $reverse-gradient;
+      background-image: $admin-gradient;
     }
 
     &__circle:hover &__text {
-      opacity: 0.8;
+      opacity: 0.9;
     }
 
     &__small&__circle &__icon-wrapper {
@@ -196,7 +204,6 @@
     }
 
     &__circle&__disabled &__icon-wrapper {
-      background: $text-color;
       cursor: default;
       opacity: 0.3;
     }

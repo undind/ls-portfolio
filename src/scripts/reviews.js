@@ -1,27 +1,48 @@
 import Vue from 'vue';
-import reviews from '../data/reviews';
+import axios from 'axios';
 import Flickity from 'vue-flickity';
 
-new Vue({
-  el: '#reviews',
-  components: {
-    Flickity
-  },
-  data: {
-    reviews,
-    currentIndex: 0,
-    flickityOptions: {
-    pageDots: false,
-    prevNextButtons: false,
-    adaptiveHeight: true,
-    watchCSS: false,
-    cellAlign: 'left',
-    groupCells: window.innerWidth > 480 ? 2 : 1,
+const review = {
+  template: '#review',
+  props: {
+    author: {
+      type: String,
     },
+    occ: {
+      type: String,
+    },
+    photo: {
+      type: String,
+    },
+    text: {
+      type: String,
+    },
+  },
+};
+
+new Vue({
+  el: '#reviews-container',
+  template: '#reviews-content',
+  components: {
+    Flickity,
+    review
+  },
+  data() {
+    return {
+      reviews: [],
+      currentSlideIndex: 0,
+      flickityOptions: {
+        prevNextButtons: false,
+        pageDots: false,
+        resize: true,
+        groupCells: window.innerWidth > 768 ? 2 : 1,
+        cellAlign: 'left',
+      },
+    };
   },
   computed: {
     slidesLength() {
-      return window.innerWidth > 480 ? Math.ceil(this.reviews.length / 2) : this.reviews.length;
+      return Math.ceil(this.reviews.length / this.flickityOptions.groupCells);
     },
   },
   methods: {
@@ -31,16 +52,47 @@ new Vue({
     previous() {
       this.$refs.flickity.previous();
     },
+    setCellHeight() {
+      const slides = this.$refs.flickity.getCellElements();
+      slides.forEach((slide) => (slide.style.height = ''));
+
+      const heights = slides.map((slide) => slide.offsetHeight);
+      const max = Math.max(...heights);
+
+      slides.forEach((slide) => (slide.style.height = max + 'px'));
+
+      const viewport = document.querySelector('.flickity-viewport');
+      viewport.style.height = max + 'px';
+    },
+    onResize() {
+      this.flickityOptions.groupCells = window.innerWidth > 768 ? 2 : 1;
+      this.setCellHeight();
+    },
+    async fetchReviews() {
+      const { data: reviews } = await axios.get(`${process.env.BASE_URL}/reviews/${process.env.USER_ID}`);
+      this.reviews = reviews.map((item) => ({
+        ...item,
+        photo: `${process.env.BASE_URL}/${item.photo}`,
+      }));
+    },
+    async initializeSlider() {
+      await this.fetchReviews();
+      this.$nextTick(() => {
+        this.$refs.flickity.rerender();
+        this.setCellHeight();
+        this.$refs.flickity.on('change', () => {
+          this.currentSlideIndex = this.$refs.flickity.selectedIndex();
+        });
+      });
+    }
   },
   created() {
-    this.reviews = reviews.map((review) => ({
-      ...review,
-      photo: require(`images/${review.photo}`),
-    }));
+    this.initializeSlider();
   },
   mounted() {
-    this.$refs.flickity.on('change', (index) => {
-      this.currentIndex = index;
-    });
+    window.addEventListener('resize', this.onResize);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize);
   },
 });
