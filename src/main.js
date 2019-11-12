@@ -9,4 +9,4 @@ import "./scripts/reviews";
 import "./scripts/works";
 import "./scripts/hamburger";
 import "./scripts/feedback";
-import "./scripts/preloader";
+// import "./scripts/preloader";
